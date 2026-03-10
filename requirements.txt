@@ -1,0 +1,6 @@
+flask
+requests
+markdown
+diskcache
+psutil
+pyhton-dotenv
