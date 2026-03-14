@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {# add opengraph #}
+
+    {# Fonts — MuseoModerno & Montserrat #}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    {% block title %}
+      <title>Landing | Peter Cakebread</title>
+    {% endblock %}
+  </head>
+  <body>
+    {# navbar #}
+    {% macro navbar(links) %}
+      <nav>
+        <a href="{{ url_for('landing') }}" class="namecard"></a>
+        <div>
+          {% for l in links %}
+            <a
+              href="{{ url_for(links.name) }}"
+              class="{{ 'nav-link active' if links.active else 'nav-link' }}"
+            ></a>
+          {% endfor %}
+        </div>
+      </nav>
+    {% endmacro %}
+
+    {% block content %}
+    {% endblock %}
+
+    <footer></footer>
+  </body>
+</html>

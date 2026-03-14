@@ -175,60 +175,73 @@ def list_repo(repos):
 
 
 
+def set_active_link(active_route):
+    links = {
+        'landing': {'name': 'landing', 'active': False},
+        'about': {'name': 'about', 'active': False},
+        'projects': {'name': 'projects', 'active': False},
+        'contact': {'name': 'contact', 'active': False},
+        'webhosting': {'name': 'webhosting', 'active': False},
+    }
+    links[active_route].active = True
+    return links
+    
+
 @app.route('/')
-def hello_world():  # put application's code here
-    return render_template("landing.html")
+@app.route('/home')
+@app.route('/landing')
+def landing():
+    links = set_active_link('landing')
+
+    return render_template("landing.html", links=links)
 
 @app.route('/about')
 def about():
-    return render_template("about.html")
+    links = set_active_link('about')
+
+    return render_template("about.html", links=links)
 
 @app.route('/projects')
 def projects():
+    links = set_active_link('projects')
 
-    un_repos = get_github_repos()
-
-    repos = reformat(un_repos)
-    return render_template("projects.html", repos=repos)
-
+    repos = reformat(get_github_repos())
+    return render_template("projects.html", repos=repos, links=links)
 
 @app.route('/projects/<name>')
 def project_page(name):
-    un_repos = get_github_repos()
 
-    repos = reformat(un_repos)
-
+    repos = reformat(get_github_repos())
     repo_list = list_repo(repos)
 
-
     if name in repo_list:
-        # Get the path to the README.md file
         readme_path = f'static/github_cache/{name}/README.md'
-
-        # Read the content of the README.md file
         with open(readme_path, 'r') as readme_file:
             content = readme_file.read()
 
-        # Convert Markdown to HTML
         html_content = markdown.markdown(content)
 
-        # Render the HTML in a simple template
-        return render_template('project.html', content=html_content, repo_data=get_repo(repos, name))
+        links = set_active_link('projects')
 
+        return render_template('project.html', content=html_content, repo_data=get_repo(repos, name), links=links)
     else:
         return "not found"
 
 @app.route('/contact')
 def contact():
-    return render_template("contact.html")
+    links = set_active_link('contact')
+
+    return render_template("contact.html", links=links)
 
 @app.route('/webhosting')
 def host():
+    links = set_active_link('webhosting')
+
     uptime = get_uptime()
     temp = get_temp()
     cpu_usage = psutil.cpu_percent()
-
-    return render_template("hosting.html", uptime=uptime, temp=temp, cpu_usage=cpu_usage)
+    
+    return render_template("hosting.html", uptime=uptime, temp=temp, cpu_usage=cpu_usage, links=links)
 
 
 if __name__ == '__main__':
