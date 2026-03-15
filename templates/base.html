@@ -13,29 +13,45 @@
       rel="stylesheet"
     />
 
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <script src="{{url_for('static', filename='default.js')}}"></script>
+    <script defer src="{{url_for('static', filename='script.js')}}"></script>
+
     {% block title %}
       <title>Landing | Peter Cakebread</title>
     {% endblock %}
   </head>
   <body>
-    {# navbar #}
     {% macro navbar(links) %}
-      <nav>
-        <a href="{{ url_for('landing') }}" class="namecard"></a>
-        <div>
-          {% for l in links %}
+      <nav id="heroCard">
+        <a href="{{ url_for('landing') }}" id="nameCard">
+          <img src="/static/logo.svg" />
+          <span>Peter C</span>
+        </a>
+
+        <div id="mobileNavItems">hamburger</div>
+
+        <div id="desktopNavItems">
+          {% for link in links %}
+            {% set this = links[link] %}
             <a
-              href="{{ url_for(links.name) }}"
-              class="{{ 'nav-link active' if links.active else 'nav-link' }}"
-            ></a>
+              href="{{ url_for(this['name']) }}"
+              class="nav-link {{ 'current' if this['active'] }}"
+              >{{ this['name'] }}</a
+            >
           {% endfor %}
         </div>
       </nav>
     {% endmacro %}
 
     {% block content %}
+      {# ——— MAIN PAGE ——— #}
     {% endblock %}
 
-    <footer></footer>
+    {# footer #}
+    {% include 'footer.html' %}
   </body>
 </html>

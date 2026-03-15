@@ -1,7 +1,10 @@
 html,
-body {
+body,
+main {
   width: 100dvw;
   min-height: 100dvh;
+  overflow-x: hidden;
+  margin: 0;
 }
 
 .museomoderno {
@@ -16,4 +19,34 @@ body {
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
+}
+
+/* ————————————————————————————————————————— */
+
+.page-section {
+  width: 100dvw;
+  height: 100dvh;
+  border-bottom: 1px solid black;
+  background-image: url(./sonic.jpg);
+}
+
+#hero {
+  height: 120vh;
+}
+
+/* ————————————————————————————————————————— */
+
+/* ————————————————————————————————————————— */
+
+.desktop-nav-links {
+  display: none;
+}
+
+@media screen and (width >= 1000px) {
+  .desktop-nav-links {
+    display: initial;
+  }
+  .mobile-nav-links {
+    display: none;
+  }
 }
