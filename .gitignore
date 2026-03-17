@@ -1,10 +1,9 @@
-.vscode
-
-# Prettier
+# Dev
 node_modules
 package-lock.json
 package.json
 .prettierrc
+.vscode
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

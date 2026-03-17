@@ -1,0 +1,68 @@
+html,
+body,
+main {
+  width: 100dvw;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  margin: 0;
+  color: var(--text);
+}
+
+:root {
+  font-size: 16px;
+
+  --text: hsl(0, 0%, 98%);
+  --background: hsl(240, 100%, 2%);
+  --primary: hsl(232, 79%, 47%);
+  --secondary: hsl(194, 100%, 50%);
+  --accent: hsl(44, 83%, 68%);
+}
+
+.museomoderno {
+  font-family: "MuseoModerno", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.montserrat {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+a {
+  color: var(--secondary);
+  &.min {
+    text-decoration: none;
+  }
+  &:visited {
+    color: oklch(from currentColor calc(l - 5) c h);
+  }
+}
+
+.glass {
+  --intensity: 0.1;
+  background-color: oklch(from white l c h / var(--intensity));
+  box-shadow: 8px 8px 4px oklch(from black l c h / calc(var(--intensity) / 2));
+  border: 1px solid oklch(from white l c h / calc(var(--intensity) * 3));
+
+  border-radius: 20px;
+  padding: 1rem 2rem;
+  backdrop-filter: blur(4px);
+}
+.glass.tinted {
+  --intensity: 0.25;
+  backdrop-filter: blur(12px);
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -0.33rem;
+  }
+}

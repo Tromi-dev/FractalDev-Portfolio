@@ -13,39 +13,55 @@
       rel="stylesheet"
     />
 
+    {% block head %}
+    {% endblock %}
+
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='style.css') }}"
+      href="{{ url_for('static', filename='global.css') }}"
     />
-    <script src="{{url_for('static', filename='default.js')}}"></script>
-    <script defer src="{{url_for('static', filename='script.js')}}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='nav.css') }}" />
+
+    <!-- <script src="{{url_for('static', filename='default.js')}}"></script>
+    <script defer src="{{url_for('static', filename='script.js')}}"></script> -->
+    <script defer src="{{url_for('static', filename='navMorph.js')}}"></script>
 
     {% block title %}
       <title>Landing | Peter Cakebread</title>
     {% endblock %}
   </head>
   <body>
-    {% macro navbar(links) %}
-      <nav id="heroCard">
-        <a href="{{ url_for('landing') }}" id="nameCard">
-          <img src="/static/logo.svg" />
-          <span>Peter C</span>
-        </a>
+    {# Keeps pre-rendered code, but allows u to determine its location #}
 
-        <div id="mobileNavItems">hamburger</div>
+    {% macro navbar(links, isHero=False) %}
+      {# —————————————————————————————————————— #}
+      <nav id="heroCard" class="museomoderno tinted {{ 'glass' if isHero }}">
+        <section
+          id="nameCard"
+          class="min tinted {{ 'glass' if not isHero }}"
+        ></section>
 
-        <div id="desktopNavItems">
+        <div
+          class="nav-items mobile museomoderno tinted {{ 'glass' if not isHero }}"
+        >
+          hamburger
+        </div>
+
+        <div
+          class="nav-items desktop museomoderno tinted {{ 'glass' if not isHero }}"
+        >
           {% for link in links %}
             {% set this = links[link] %}
             <a
-              href="{{ url_for(this['name']) }}"
-              class="nav-link {{ 'current' if this['active'] }}"
+              href="{{ url_for(link) }}"
+              class="nav-link min {{ 'current' if this['active'] }} "
               >{{ this['name'] }}</a
             >
           {% endfor %}
         </div>
       </nav>
     {% endmacro %}
+    {# ——————————————————————————————————————————————————————————————— #}
 
     {% block content %}
       {# ——— MAIN PAGE ——— #}

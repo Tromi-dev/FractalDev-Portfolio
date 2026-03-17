@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 
+{% block head %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}" />
+{% endblock %}
+
 {% block content %}
-  {{ navbar(links) }}
+  {{ navbar(links, True) }}
 
   <main>
     {# insert bg video/gif #}

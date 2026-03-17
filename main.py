@@ -165,14 +165,12 @@ def list_repo(repos):
 
 def set_active_link(active_route):
     links = {
-        "landing": {"name": "landing", "active": False},
-        "about": {"name": "about", "active": False},
-        "projects": {"name": "projects", "active": False},
-        "contact": {"name": "contact", "active": False},
-        "hobbies": {"name": "hobbies", "active": False},
+        "home": {"name": "Home", "active": False},
+        "about": {"name": "About", "active": False},
+        "projects": {"name": "Projects", "active": False},
+        "contact": {"name": "Contact", "active": False},
+        "hobbies": {"name": "Hobbies", "active": False},
     }
 
     links[active_route].update({"active": True})
-    # for i in links:
-    #     print(f"\n{i['name']}")
     return links

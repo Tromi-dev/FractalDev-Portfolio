@@ -8,8 +8,8 @@ app = Flask(__name__)
 @app.route("/")
 @app.route("/home")
 @app.route("/landing")
-def landing():
-    links = set_active_link("landing")
+def home():
+    links = set_active_link("home")
 
     return render_template("index.html", links=links)
 
