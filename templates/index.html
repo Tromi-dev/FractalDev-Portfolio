@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block head %}
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='/style/home.css') }}"
+  />
+{% endblock %}
+
+{% block content %}
+  {{ navbar(links, True) }}
+
+  <main>
+    {# insert bg video/gif #}
+    <section id="hero" class="page-section"></section>
+    <section id="whoAmI" class="page-section"></section>
+    <section id="projects" class="page-section"></section>
+  </main>
+{% endblock %}

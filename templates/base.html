@@ -1,69 +1,79 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='media/icon.png')}}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {# add opengraph #}
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js" integrity="sha512-Xo0Jh8MsOn72LGV8kU5LsclG7SUzJsWGhXbWcYs2MAmChkQzwiW/yTQwdJ8w6UA9C6EVG18GHb/TrYpYCjyAQw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css" integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js">
-       </script>
+    {# Fonts — MuseoModerno & Montserrat #}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
 
-    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
-    <title>{% block page_name %}{% endblock %} - Peter Cakebread</title>
-    {% block head %}{% endblock %}
-</head>
-<body>
-    <div class="banner">
-        <div class="banner-text">
-            <div class="logo">
-                <a href="/"><p class="logo">Peter Cakebread</p></a>
-            </div>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='/style/global.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='/style/nav.css') }}"
+    />
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='/images/logo.svg') }}"
+      type="image/x-icon"
+    />
+
+    <!-- <script src="{{url_for('static', filename='default.js')}}"></script>
+    <script defer src="{{url_for('static', filename='script.js')}}"></script> -->
+    <script defer src="{{url_for('static', filename='navMorph.js')}}"></script>
+
+    <title>{% block title %}Landing{% endblock %} | Peter Cakebread</title>
+
+    {% block head %}
+    {% endblock %}
+  </head>
+  <body>
+    {# Keeps pre-rendered code, but allows u to determine its location #}
+
+    {% macro navbar(links, isHero=False) %}
+      {# —————————————————————————————————————— #}
+      <nav id="heroCard" class="museomoderno tinted {{ 'glass' if isHero }}">
+        <section
+          id="nameCard"
+          class="min tinted {{ 'glass' if not isHero }}"
+        ></section>
+
+        <div
+          class="nav-items mobile museomoderno tinted {{ 'glass' if not isHero }}"
+        >
+          hamburger
         </div>
-    </div>
 
-    <div class="nav">
-        <div class="ui menu custom-menu">
-
-        <a href="/" class="item">
-            <div class="ui primary button">Home</div>
-
-        </a>
-
-            <a href="/projects" class="item">
-            <div class="ui button">Projects</div>
-        </a>
-
-            <a href="/webhosting" class="item">
-            <div class="ui button">Web Hosting</div>
-        </a>
-
-        <a href="/about" class="item">
-            <div class="ui button">About</div>
-        </a>
-
-        <a href="/contact" class="item">
-            <div class="ui button">Contact</div>
-        </a>
-
-
-
+        <div
+          class="nav-items desktop museomoderno tinted {{ 'glass' if not isHero }}"
+        >
+          {% for link in links %}
+            {% set this = links[link] %}
+            <a
+              href="{{ url_for(link) }}"
+              class="nav-link min {{ 'current' if this['active'] }} "
+              >{{ this['name'] }}</a
+            >
+          {% endfor %}
         </div>
-    </div>
+      </nav>
+    {% endmacro %}
+    {# ——————————————————————————————————————————————————————————————— #}
 
-    <div class="content">
-        {% block content %}{% endblock %}
-    </div>
+    {% block content %}
+      {# ——— MAIN PAGE ——— #}
+    {% endblock %}
 
-    <div class="footer">
-        <p>Git Hub <a href= "https://github.com/Mos6502DIP">Peter Cakebread</a><p>
-        <h3>Contact</h3>
-        <p>
-            <a href= "mailto:peterjcakebread@gmail.com">peterjcakebread@gmail.com</a> (For all other inquires) <br>
-        </p>
-    </div>
-
-</body>
+    {# Footer #}
+    {% include 'footer.html' %}
+  </body>
 </html>
