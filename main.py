@@ -12,7 +12,7 @@ load_dotenv()
 
 app = Flask(__name__)
 
-API_URL = os.getenv('API_URL')
+
 USERNAME = os.getenv('GITHUB_USERNAME')
 
 
@@ -90,8 +90,8 @@ def get_github_repos():
     headers = {
         'Authorization': f'token {TOKEN}'
     }
-
-    response = requests.get(API_URL, headers=headers)
+    
+    response = requests.get(f"https://api.github.com/users/{USERNAME}/repos", headers=headers)
 
     # Check if the response is successful
     if response.status_code == 200:

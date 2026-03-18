@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block page_name %}Projects{% endblock %}
+
+{% block head %}
+    <meta property="og:title" content="Peter Cakebread - Projects" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://fractaldev.co/projects" />
+    <meta property="og:image" content="https://fractaldev.co/static/media/not_mine.jpg" />
+    <meta property="og:description" content="Hi i am Peter and here are some of my projects." />
+    <meta name="theme-color" content="#FF0000">
+    <!-- Include this to make the og:image larger -->
+    <meta name="twitter:card" content="summary_large_image">
+{% endblock %}
+
+{% block content %}
+
+
+    <div class="title">
+        <h1>Projects</h1>
+    </div>
+
+
+    <div class="projects">
+        <div class="ui link cards">
+                {% for repo in repos %}
+
+                  <div id="cool-card" class="ui card">
+                    <a class="image" href="{{ repo["page_url"] }}">
+                        {% set image = repo['local_url'] + "/thumbnail.png" %}
+
+                        <img src="{{url_for('static', filename=image)}}">
+                    </a>
+                    <div class="content">
+                      <a class="header" href="{{ repo["page_url"] }}">{{ repo['name'] }}</a>
+                      <div class="meta">
+                          {% set subtext = "Watchers: " + repo['watchers'] + "  Forks: " + repo["forks_count"] %}
+                        <a>{{ subtext }}</a>
+                      </div>
+                      <div class="description">
+                        {{ repo["description"] }}
+                      </div>
+                    </div>
+                    <div class="extra content">
+                      <span class="right floated">
+                          {% set update = repo["updated_at"][:10] %}
+                          Updated at:<br>
+                          {{ update }}
+                      </span>
+                      <span>
+
+                          {% set create = repo["created_at"][:10] %}
+                          Created At:<br>
+                        {{ create }}
+                      </span>
+                    </div>
+                  </div>
+                {% endfor %}
+            </div>
+    </div>
+    <div class="projects_footer">
+        <h1>All of my projects are on GitHub</h1>
+        <p>Some Projects may not be on here as this page updates daily</p>
+        <div class="github-card" data-github="Mos6502DIP" data-width="400" data-height="" data-theme="default"></div>
+        <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+
+    </div>
+{% endblock %}
