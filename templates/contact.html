@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block page_name %}Contact{% endblock %}
+
+{% block head %}
+    <meta property="og:title" content="Peter Cakebread - Contact" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://fractaldev.co/contact" />
+    <meta property="og:image" content="https://fractaldev.co/static/media/MetaBanner.jpg" />
+    <meta property="og:description" content="Get in touch here." />
+    <meta name="theme-color" content="#FF0000">
+    <!-- Include this to make the og:image larger -->
+    <meta name="twitter:card" content="summary_large_image">
+{% endblock %}
+
+{% block content %}
+    <div class="container-intro">
+
+        <div class="text" style="padding: 20px">
+            <h1>Contact</h1>
+            <p>If you would like to get in touch for any reason email me at <a href= "mailto:peterjcakebread@gmail.com">
+                peterjcakebread@gmail.com</a>
+            <br>If you would like my cv email me at the appropriate email address. <br>
+                (I should respond within a day. If I don't I apologise in advance and try sending another)
+
+        </div>
+
+        <div class="image">
+            <h1>Email</h1>
+            <p>
+            <a href= "mailto:peterjcakebread@gmail.com">peterjcakebread@gmail.com</a> <br>(all inquires) <br></p>
+
+            <h1>Git Hub</h1>
+
+            <div class="github-card" data-github="Mos6502DIP" data-width="400" data-height="" data-theme="default"></div>
+            <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+
+        </div>
+
+    </div>
+{% endblock %}

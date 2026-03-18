@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block page_name %}Web Hosting{% endblock %}
+
+{% block head %}
+    <meta property="og:title" content="Peter Cakebread - Webhosting" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://fractaldev.co/webhosting" />
+    <meta property="og:image" content="https://fractaldev.co/static/media/not_mine.jpg" />
+    <meta property="og:description" content="Webhosting by peter cakebread" />
+    <meta name="theme-color" content="#FF0000">
+    <!-- Include this to make the og:image larger -->
+    <meta name="twitter:card" content="summary_large_image">
+{% endblock %}
+
+{% block content %}
+    <div class="title">
+        <h1>Web hosting</h1>
+    </div>
+
+    <div class="stats">
+        <h1>Lucario's Stats</h1>
+        <h2>{{ uptime }} - Uptime</h2>
+        <h2>{{ cpu_usage }}% - Cpu Usage</h2>
+        <h2>{{ temp }} - Temperature</h2>
+        <p>Server Maintenance occurs on mondays at 1 am</p>
+    </div>
+
+{% endblock %}
