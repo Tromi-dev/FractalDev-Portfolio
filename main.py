@@ -8,8 +8,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# app = Flask(__name__)
-
 API_URL = os.getenv("API_URL")
 USERNAME = os.getenv("GITHUB_USERNAME")
 
@@ -72,8 +70,6 @@ def get_github_repos():
 
     TOKEN = os.getenv("TOKEN")
 
-    # url = f"http://api.github.com/users/{USERNAME}/repos"
-
     # Try to retrieve cached data
     cached_data = cache.get(USERNAME)
     if cached_data is not None:
@@ -83,7 +79,8 @@ def get_github_repos():
     # Set the headers for authentication
     headers = {"Authorization": f"token {TOKEN}"}
 
-    response = requests.get(API_URL, headers=headers)
+    url = f"http://api.github.com/users/{USERNAME}/repos"
+    response = requests.get(url, headers=headers)
 
     # Check if the response is successful
     if response.status_code == 200:

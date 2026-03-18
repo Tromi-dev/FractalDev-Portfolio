@@ -13,9 +13,6 @@
       rel="stylesheet"
     />
 
-    {% block head %}
-    {% endblock %}
-
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='global.css') }}"
@@ -31,8 +28,9 @@
     <script defer src="{{url_for('static', filename='script.js')}}"></script> -->
     <script defer src="{{url_for('static', filename='navMorph.js')}}"></script>
 
-    {% block title %}
-      <title>Landing | Peter Cakebread</title>
+    <title>{% block title %}Landing{% endblock %} | Peter Cakebread</title>
+
+    {% block head %}
     {% endblock %}
   </head>
   <body>
@@ -72,7 +70,7 @@
       {# ——— MAIN PAGE ——— #}
     {% endblock %}
 
-    {# footer #}
+    {# Footer #}
     {% include 'footer.html' %}
   </body>
 </html>
