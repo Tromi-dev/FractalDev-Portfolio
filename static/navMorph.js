@@ -43,8 +43,9 @@
     // Use a CSS transition on flex-direction via a class instead of
     // toggling inline styles abruptly — swap at a clear threshold
     // with hysteresis to prevent flickering at the boundary
-    const splitThreshold = 0.9;
-    const mergeThreshold = 0.85; // slightly lower = hysteresis band
+    //* merge slightly lower = hysteresis band
+    const splitThreshold = isDesktop ? 0.9 : 1;
+    const mergeThreshold = isDesktop ? 0.85 : 0.95;
 
     const shouldBeSplit = morphStage >= splitThreshold;
     const shouldBeMerged = morphStage < mergeThreshold;

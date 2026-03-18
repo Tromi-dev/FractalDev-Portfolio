@@ -7,7 +7,7 @@
 #heroCard {
   height: 60dvh;
   width: 50%;
-  min-width: 50dvw;
+  min-width: 50%;
   font-size: 1.25rem;
   position: fixed;
   top: 50%;
@@ -45,7 +45,7 @@
 }
 
 #nameCard {
-  font-size: 6rem;
+  font-size: 3rem;
   text-align: center;
   color: var(--text);
   transition: font-size 0.1s ease-out;
@@ -60,7 +60,7 @@
   }
 }
 #heroCard.split #nameCard::after {
-  font-size: 3rem;
+  font-size: 2rem;
   white-space: preserve nowrap;
   content: "Peter C";
 }
@@ -100,6 +100,16 @@
 
   &:hover {
     background-color: oklch(from currentColor l c h / 25%);
+  }
+}
+
+@keyframes heroCardBounce {
+  0%,
+  100% {
+    top: 48%;
+  }
+  50% {
+    top: 52%;
   }
 }
 
