@@ -15,9 +15,12 @@
 
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='global.css') }}"
+      href="{{ url_for('static', filename='/style/global.css') }}"
     />
-    <link rel="stylesheet" href="{{ url_for('static', filename='nav.css') }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='/style/nav.css') }}"
+    />
     <link
       rel="shortcut icon"
       href="{{ url_for('static', filename='/images/logo.svg') }}"
