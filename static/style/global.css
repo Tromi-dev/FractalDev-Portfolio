@@ -6,16 +6,18 @@ main {
   overflow-x: hidden;
   margin: 0;
   color: var(--text);
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--text) transparent;
 }
 
 :root {
-  font-size: 16px;
+  font-size: 14px;
 
-  --text: hsl(0, 0%, 98%);
-  --background: hsl(240, 100%, 2%);
-  --primary: hsl(232, 79%, 47%);
-  --secondary: hsl(194, 100%, 50%);
-  --accent: hsl(44, 83%, 68%);
+  --text: #eeedf2;
+  --primary: #572fe9;
+  --secondary: #2741e6;
+  --accent: #eae2a6;
 }
 
 .museomoderno {
@@ -60,9 +62,15 @@ a {
 @keyframes bounce {
   0%,
   100% {
-    translate: 0 0;
+    translate: 0 0.2rem;
   }
   50% {
-    translate: 0 -0.33rem;
+    translate: 0 -0.25rem;
+  }
+}
+
+@media screen and (width >= 1000px) {
+  :root {
+    font-size: 16px;
   }
 }

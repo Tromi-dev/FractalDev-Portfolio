@@ -7,7 +7,9 @@
 #heroCard {
   height: 60dvh;
   width: 50%;
-  min-width: 50%;
+  min-height: fit-content;
+  min-width: fit-content;
+  max-width: 95dvw;
   font-size: 1.25rem;
   position: fixed;
   top: 50%;
@@ -18,14 +20,14 @@
   align-items: center;
   justify-content: space-evenly;
   gap: 2rem;
-  text-shadow: 2px 2px 2px oklch(from black l c h / 25%);
+  text-shadow: 4px 4px 8px oklch(from black l c h / 25%);
 
   transition:
     height 0.1s ease-out,
     width 0.15s ease-out,
     gap 0.1s ease-out,
     transform 0.1s ease-out,
-    background-color 0.3s ease,
+    background-color 0.3s ease-out,
     backdrop-filter 0.3s ease;
 
   &.reset,
@@ -46,23 +48,37 @@
 
 #nameCard {
   font-size: 3rem;
+  font-weight: 400;
   text-align: center;
   color: var(--text);
   transition: font-size 0.1s ease-out;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-wrap: wrap;
+  gap: 1rem;
 
   &::after {
     content: "Peter Cakebread";
     line-height: 90%;
-    letter-spacing: -0.06em;
+    letter-spacing: -0.05em;
   }
 }
-#heroCard.split #nameCard::after {
-  font-size: 2rem;
-  white-space: preserve nowrap;
-  content: "Peter C";
+#heroCard.split {
+  #nameCard {
+    flex-direction: row;
+
+    &::after {
+      content: "Peter C";
+      font-size: 2rem;
+      white-space: preserve nowrap;
+      text-overflow: clip;
+    }
+    > svg {
+      height: 2em;
+    }
+  }
 }
 
 .nav-items {
@@ -70,7 +86,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  width: 80%;
+  width: max-content;
 }
 
 .split {
@@ -85,8 +101,8 @@
   padding: 0.5rem 1rem;
   border-radius: 100px;
   background-color: oklch(from white l c h / 0);
-  color: var(--primary);
-  font-weight: 500;
+  color: var(--text);
+  font-weight: 400;
 
   transition: background-color 300ms ease-in-out;
 
@@ -103,6 +119,20 @@
   }
 }
 
+.nav-mobile-list {
+  display: flex;
+
+  /* * will likely overlap as height shrinks */
+  /* ? maybe swap earlier TEST FIRST */
+  flex-direction: column;
+  align-items: center;
+}
+
+#nameCard .logo {
+  width: auto;
+  height: 3em;
+}
+
 @keyframes heroCardBounce {
   0%,
   100% {
@@ -113,20 +143,48 @@
   }
 }
 
-/* ————————————————————————————————————————————————————————————————— */
+/* * Mobile First */
+/* mobile screen, hero section —> show list */
+.nav-items.mobile .nav-mobile-menu {
+  display: none;
+}
+.nav-items.mobile .nav-mobile-list {
+  display: flex;
+}
 
-/* mobile first */
+/* mobile screen, NOT hero section —> show menu */
+.split .nav-items.mobile .nav-mobile-menu {
+  display: flex;
+}
+.split .nav-items.mobile .nav-mobile-list {
+  display: none;
+}
+
 .nav-items.desktop {
   display: none;
 }
+
+/* —— DESKTOP —————————————————————————————————— */
 @media screen and (width >= 1000px) {
   .nav-items {
     &.desktop {
-      /* return to norm */
       display: flex;
     }
     &.mobile {
       display: none;
+    }
+  }
+
+  #nameCard {
+    flex-direction: row;
+    font-size: 3rem;
+
+    .logo {
+      height: 2em;
+    }
+
+    &:is(.split #nameCard)::after {
+      content: "Peter Cakebread";
     }
   }
 }

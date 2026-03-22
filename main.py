@@ -8,9 +8,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
 USERNAME = os.getenv("GITHUB_USERNAME")
-
 
 # Path to store the repositories locally
 BASE_DIR = os.getenv("BASE_DIR")

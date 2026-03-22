@@ -9,7 +9,8 @@ templates/cache_directory/45/cd/4fa734b5dfb20ea4b8db86ee74e2.val
 templates/cache_directory/cache.db
 templates/cache_directory/cache.db-shm
 templates/cache_directory/cache.db-wal
-__pycache__/main.cpython-313.pyc
+# __pycache__/main.cpython-313.pyc
+__pycache__/main.cpython-312.pyc
 /static/wl
 cache_directory/94/83/3ad76fafb5c80b423791269ce65e.val
 cache_directory/cache.db

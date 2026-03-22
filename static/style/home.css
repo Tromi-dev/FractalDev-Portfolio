@@ -1,14 +1,17 @@
 .page-section {
   width: 100dvw;
   height: 110dvh;
-  border-bottom: 1px solid black;
-  /* background-image: url(./sonic.jpg); */
-}
-
-main {
-  background-image: url(./images/bg.png);
 }
 
 #hero {
   height: 120vh;
+}
+
+.bg-image {
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100dvw;
+  height: 100dvh;
 }

@@ -2,80 +2,111 @@
   const hero = document.getElementById("hero");
   if (!hero) return;
 
-  const isDesktop = window.matchMedia("(width >= 1000px)").matches;
-  const outerCard = document.getElementById("heroCard");
-  const nameCard = document.getElementById("nameCard");
-  const itemCard = document.querySelector(
-    `.nav-items.${isDesktop ? "desktop" : "mobile"}`,
-  );
+  let cleanup = null;
 
-  const initialHeight = parseFloat(window.getComputedStyle(outerCard).height);
-  const finalHeight = 70;
+  const init = () => {
+    if (cleanup) cleanup();
 
-  // Track RAF and last known state to avoid redundant work
-  let rafPending = false;
-  let isSplit = false;
+    const isDesktop = window.matchMedia("(width >= 1000px)").matches;
+    const outerCard = document.getElementById("heroCard");
+    const nameCard = document.getElementById("nameCard");
+    const itemCard = document.querySelector(
+      `.nav-items.${isDesktop ? "desktop" : "mobile"}`,
+    );
 
-  const update = () => {
-    rafPending = false;
+    // Reset ALL state from previous init before measuring
+    outerCard.removeAttribute("style");
+    nameCard.removeAttribute("style");
+    outerCard.classList.remove("split");
 
-    const scroll = window.scrollY;
-    const morphStage = Math.min(scroll / hero.offsetHeight, 1);
+    // Reset glass to its correct default for each element
+    // outerCard starts with glass (hero state), children without
+    outerCard.classList.add("glass");
+    [nameCard, itemCard].forEach((el) => el.classList.remove("glass"));
 
-    // --- Continuous interpolations ---
-    const height = initialHeight - (initialHeight - finalHeight) * morphStage;
-    outerCard.style.height = `${height}px`;
+    // Now measure from clean state
+    const initialHeight = parseFloat(window.getComputedStyle(outerCard).height);
+    const rootFontSize = parseFloat(
+      window.getComputedStyle(document.querySelector(":root")).fontSize,
+    );
+    const initialFontSize = parseFloat(
+      window.getComputedStyle(nameCard).fontSize,
+    );
+    const finalHeight = 70;
+    const finalFontSize = rootFontSize * 2;
 
-    if (isDesktop) {
-      const finalWidth = window.innerWidth * 0.9;
-      const width = 640 + (finalWidth - 640) * morphStage;
-      outerCard.style.width = `${width}px`;
-    }
+    let rafPending = false;
+    let isSplit = false;
 
-    const translateY = -window.innerHeight * 0.42 * morphStage;
-    outerCard.style.transform = `translateY(${translateY}px)`;
+    const update = () => {
+      rafPending = false;
 
-    outerCard.style.flexDirection = morphStage > 0.4 ? "row" : "column";
+      const scroll = window.scrollY;
+      const morphStage = Math.min(scroll / hero.offsetHeight, 1);
 
-    const gap = Math.max(0, (morphStage - 0.4) / 0.6) * 40;
-    outerCard.style.gap = `${gap}px`;
+      const height = initialHeight - (initialHeight - finalHeight) * morphStage;
+      outerCard.style.height = `${height}px`;
 
-    // Use a CSS transition on flex-direction via a class instead of
-    // toggling inline styles abruptly — swap at a clear threshold
-    // with hysteresis to prevent flickering at the boundary
-    //* merge slightly lower = hysteresis band
-    const splitThreshold = isDesktop ? 0.9 : 1;
-    const mergeThreshold = isDesktop ? 0.85 : 0.95;
+      if (isDesktop) {
+        const finalWidth = window.innerWidth * 0.9;
+        const width = 640 + (finalWidth - 640) * morphStage;
+        outerCard.style.width = `${width}px`;
+      }
 
-    const shouldBeSplit = morphStage >= splitThreshold;
-    const shouldBeMerged = morphStage < mergeThreshold;
+      const fontSize =
+        initialFontSize - (initialFontSize - finalFontSize) * morphStage;
+      nameCard.style.fontSize = `${fontSize / rootFontSize}rem`;
 
-    if (!isSplit && shouldBeSplit) {
-      isSplit = true;
-      outerCard.classList.remove("glass");
-      outerCard.classList.add("split");
-      [nameCard, itemCard].forEach((el) => el.classList.add("glass"));
-    } else if (isSplit && shouldBeMerged) {
-      isSplit = false;
-      outerCard.classList.add("glass");
-      outerCard.classList.remove("split");
-      [nameCard, itemCard].forEach((el) => el.classList.remove("glass"));
-    }
-  };
+      const translateY = -window.innerHeight * 0.42 * morphStage;
+      outerCard.style.transform = `translateY(${translateY}px)`;
 
-  window.addEventListener(
-    "scroll",
-    () => {
+      outerCard.style.flexDirection =
+        morphStage > (isDesktop ? 0.4 : 0.85) ? "row" : "column";
+
+      const gap = Math.max(0, (morphStage - 0.4) / 0.6) * 40;
+      outerCard.style.gap = `${gap}px`;
+
+      const splitThreshold = 0.9;
+      const mergeThreshold = 0.85;
+
+      const shouldBeSplit = morphStage >= splitThreshold;
+      const shouldBeMerged = morphStage < mergeThreshold;
+
+      if (!isSplit && shouldBeSplit) {
+        isSplit = true;
+        outerCard.classList.remove("glass");
+        outerCard.classList.add("split");
+        [nameCard, itemCard].forEach((el) => el.classList.add("glass"));
+      } else if (isSplit && shouldBeMerged) {
+        isSplit = false;
+        outerCard.classList.add("glass");
+        outerCard.classList.remove("split");
+        [nameCard, itemCard].forEach((el) => el.classList.remove("glass"));
+      }
+    };
+
+    const onScroll = () => {
       if (!rafPending) {
         rafPending = true;
         requestAnimationFrame(update);
       }
-    },
-    { passive: true },
-  );
+    };
 
-  // Run once on load to set correct initial state
-  outerCard.classList.add("reset");
-  update();
-  requestAnimationFrame(() => outerCard.classList.remove("reset"));
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    outerCard.classList.add("reset");
+    update();
+    requestAnimationFrame(() => outerCard.classList.remove("reset"));
+
+    cleanup = () => window.removeEventListener("scroll", onScroll);
+  };
+
+  // Debounce resize so init doesn't fire on every pixel change
+  let resizeTimer = null;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(init, 50);
+  });
+
+  init();
 })();

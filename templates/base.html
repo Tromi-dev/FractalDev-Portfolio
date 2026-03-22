@@ -23,7 +23,7 @@
     />
     <link
       rel="shortcut icon"
-      href="{{ url_for('static', filename='/images/logo.svg') }}"
+      href="{{ url_for('static', filename='/images/favicon.ico') }}"
       type="image/x-icon"
     />
 
@@ -38,35 +38,40 @@
   </head>
   <body>
     {# Keeps pre-rendered code, but allows u to determine its location #}
-
     {% macro navbar(links, isHero=False) %}
-      {# —————————————————————————————————————— #}
       <nav id="heroCard" class="museomoderno tinted {{ 'glass' if isHero }}">
-        <section
-          id="nameCard"
-          class="min tinted {{ 'glass' if not isHero }}"
-        ></section>
+        <section id="nameCard" class="min tinted {{ 'glass' if not isHero }}">
+          {% include 'logo.html' %}
+          {# dynamic CSS `content` #}
+        </section>
 
         <div
           class="nav-items mobile museomoderno tinted {{ 'glass' if not isHero }}"
         >
-          hamburger
+          <div class="nav-mobile-list">{{ link_items(links) }}</div>
+
+          <div class="nav-mobile-menu">Menu</div>
         </div>
 
         <div
           class="nav-items desktop museomoderno tinted {{ 'glass' if not isHero }}"
         >
-          {% for link in links %}
-            {% set this = links[link] %}
-            <a
-              href="{{ url_for(link) }}"
-              class="nav-link min {{ 'current' if this['active'] }} "
-              >{{ this['name'] }}</a
-            >
-          {% endfor %}
+          {{ link_items(links) }}
         </div>
       </nav>
     {% endmacro %}
+
+    {% macro link_items(dict) %}
+      {% for link, this in dict.items() %}
+        <a
+          href="{{ url_for(link) }}"
+          class="nav-link min {{ 'current' if this['active'] }} "
+        >
+          {{ this['name'] }}
+        </a>
+      {% endfor %}
+    {% endmacro %}
+
     {# ——————————————————————————————————————————————————————————————— #}
 
     {% block content %}
