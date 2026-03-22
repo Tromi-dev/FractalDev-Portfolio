@@ -17,3 +17,5 @@ cache_directory/cache.db
 cache_directory/cache.db-shm
 cache_directory/cache.db-wal
 /static/github_cache
+/cache_directory/8b
+/cache_directory/d7
