@@ -15,3 +15,14 @@
   width: 100dvw;
   height: 100dvh;
 }
+
+.bg-video {
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100dvw;
+  height: 100dvh;
+
+  object-fit: cover; /* makes it behave like a background image */
+}

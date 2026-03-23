@@ -12,11 +12,21 @@
 
   <main>
     {# insert bg video/gif #}
-    <img
+
+    <video
+      class="bg-video"
+      autoplay
+      muted
+      loop
+      playsinline
+    >
+      <source src="{{ url_for('static', filename='videos/waves_b.mp4') }}" type="video/mp4">
+    </video>
+    <!-- <img
       class="bg-image"
       src="{{ url_for('static', filename='/images/bg.png') }}"
       alt="XMB blue-waves background"
-    />
+    /> -->
     <section id="hero" class="page-section"></section>
     <section id="whoAmI" class="page-section"></section>
     <section id="projects" class="page-section"></section>
