@@ -6,7 +6,7 @@
 
 #heroCard {
   height: 60dvh;
-  width: 50%;
+  width: 60%;
   min-height: fit-content;
   min-width: fit-content;
   max-width: 95dvw;
@@ -21,6 +21,7 @@
   justify-content: space-evenly;
   gap: 2rem;
   text-shadow: 4px 4px 8px oklch(from black l c h / 25%);
+  z-index: 9001;
 
   transition:
     height 0.1s ease-out,
@@ -92,8 +93,8 @@
 .split {
   #nameCard,
   .nav-items {
-    height: 80%;
-    min-height: fit-content;
+    height: 70%;
+    /* min-height: fit-content; */
   }
 }
 

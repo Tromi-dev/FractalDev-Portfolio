@@ -4,7 +4,7 @@
 
   let cleanup = null;
 
-  const init = () => {
+  function init() {
     if (cleanup) cleanup();
 
     const isDesktop = window.matchMedia("(width >= 1000px)").matches;
@@ -26,6 +26,8 @@
 
     // Now measure from clean state
     const initialHeight = parseFloat(window.getComputedStyle(outerCard).height);
+    const initialWidth =
+      parseFloat(window.getComputedStyle(outerCard).width) || 640;
     const rootFontSize = parseFloat(
       window.getComputedStyle(document.querySelector(":root")).fontSize,
     );
@@ -38,7 +40,7 @@
     let rafPending = false;
     let isSplit = false;
 
-    const update = () => {
+    function update() {
       rafPending = false;
 
       const scroll = window.scrollY;
@@ -49,7 +51,7 @@
 
       if (isDesktop) {
         const finalWidth = window.innerWidth * 0.9;
-        const width = 640 + (finalWidth - 640) * morphStage;
+        const width = initialWidth + (finalWidth - initialWidth) * morphStage;
         outerCard.style.width = `${width}px`;
       }
 
@@ -83,7 +85,7 @@
         outerCard.classList.remove("split");
         [nameCard, itemCard].forEach((el) => el.classList.remove("glass"));
       }
-    };
+    }
 
     const onScroll = () => {
       if (!rafPending) {
@@ -99,7 +101,7 @@
     requestAnimationFrame(() => outerCard.classList.remove("reset"));
 
     cleanup = () => window.removeEventListener("scroll", onScroll);
-  };
+  }
 
   // Debounce resize so init doesn't fire on every pixel change
   let resizeTimer = null;
