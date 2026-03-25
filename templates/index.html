@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
 {% block head %}
+  {{ super() }}
+
   <link
     rel="stylesheet"
     href="{{ url_for('static', filename='/style/home.css') }}"
@@ -13,22 +15,63 @@
   <main>
     {# insert bg video/gif #}
 
-    <video
-      class="bg-video"
-      autoplay
-      muted
-      loop
-      playsinline
-    >
-      <source src="{{ url_for('static', filename='videos/waves_b.mp4') }}" type="video/mp4">
+    <video class="bg-video" autoplay muted loop playsinline>
+      <source
+        src="{{ url_for('static', filename='videos/waves_b.mp4') }}"
+        type="video/mp4"
+      />
     </video>
-    <!-- <img
-      class="bg-image"
-      src="{{ url_for('static', filename='/images/bg.png') }}"
-      alt="XMB blue-waves background"
-    /> -->
-    <section id="hero" class="page-section"></section>
-    <section id="whoAmI" class="page-section"></section>
-    <section id="projects" class="page-section"></section>
+
+    <section id="hero" class="page-section">
+      <!-- navbar is content -->
+    </section>
+
+    <section id="whoAmI" class="page-section">
+      {# Mobile —> flex; Desktop —> 2x2 grid #}
+      <div class="home-sect-content-wrapper">
+        <h2 class="home-sect-header">Who Am I?</h2>
+        <div class="glass image-wrapper">
+          <img
+            src="{{ url_for('static', filename='media/server.webp') }}"
+            alt="Placeholder image of server"
+            class="home-sect-image"
+          />
+        </div>
+        <p class="home-sect-text">
+          Hi I am a software developer, server hosting and repair technician. I
+          enjoy manging hardware for hosting eg the server running this website,
+          hopefully. I love repairing games consoles and Ipods and restoring to
+          their original condition but some also adding mods like mod chips,
+          custom lights and ssds even to ipods.
+        </p>
+        <span class="home-sect-cta">
+          <a href="{{ url_for('about') }}"></a>
+        </span>
+      </div>
+    </section>
+
+    <section id="projects" class="page-section">
+      <div class="home-sect-content-wrapper">
+        <h2 class="home-sect-header">My Projects</h2>
+        <div class="glass image-wrapper">
+          <img
+            src="{{ url_for('static', filename='media/luca.png') }}"
+            alt="Placeholder image of example project"
+            class="home-sect-image"
+          />
+        </div>
+        <p class="home-sect-text">
+          I work on serval projects these consist of Lucaplex, Ocean Zone (video
+          hosting project), and Telepy. Lucaplex while currently not on Github
+          is a software I made which organises all my movies. Ocean Zone will be
+          a YouTube clone and still is currently in development due to issues
+          with my isp causing delays. While Telepy is a project that I have
+          worked on for the last 3 years and is evolving every time i look at it
+          currently I am planning to work on a web client which will be hosted
+          on this site.
+        </p>
+        <span class="home-sect-cta"><a href="url_for('projects')"></a></span>
+      </div>
+    </section>
   </main>
 {% endblock %}

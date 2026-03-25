@@ -1,37 +1,45 @@
 {% extends "base.html" %}
 
-{% block page_name %}{{ repo_data['name'] }}{% endblock %}
+{% block title %}{{ repo_data['name'] }}{% endblock %}
 
 {% block head %}
-    <meta property="og:title" content="Peter Cakebread - {{ repo_data['name'] }}" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://fractaldev.co/projects/{{ repo_data['name'] }}" />
-    {% set image = repo_data['local_url'] + "/thumbnail.png" %}
-    <meta property="og:image" content="{{url_for('static', filename=image)}}" />
-    <meta property="og:description" content="{{ repo_data["description"] }}" />
-    <meta name="theme-color" content="#38cc02">
-    <!-- Include this to make the og:image larger -->
-    <meta name="twitter:card" content="summary_large_image">
+  <meta
+    property="og:title"
+    content="Peter Cakebread - {{ repo_data['name'] }}"
+  />
+  <meta property="og:type" content="website" />
+
+  {% set project_url = 'https://fractaldev.co/projects/' + repo_data['name'] %}
+  <meta property="og:url" content="{{ project_url }}" />
+
+  {% set image = repo_data['local_url'] + "/thumbnail.png" %}
+  <meta property="og:image" content="{{ url_for('static', filename=image) }}" />
+
+  <meta property="og:description" content="{{ repo_data['description'] }}" />
+  <!-- <meta name="theme-color" content="#38cc02" /> -->
+  <!-- Include this to make the og:image larger -->
+  <meta name="twitter:card" content="summary_large_image" />
 {% endblock %}
 
 {% block content %}
-    <div class="readme">
-        {{ content|safe }}
-    </div>
-     <div class="project_footer">
-        <h1>Check out the project on Github</h1>
-        <div class="github-card" data-github="Mos6502DIP/{{ repo_data['name'] }}" data-width="400" data-height="" data-theme="default"></div>
-        <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+  <div class="readme">{{ content|safe }}</div>
+  <div class="project_footer">
+    <h1>Check out the project on Github</h1>
+    <div
+      class="github-card"
+      data-github="Mos6502DIP/{{ repo_data['name'] }}"
+      data-width="400"
+      data-height=""
+      data-theme="default"
+    ></div>
+    <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+  </div>
 
-    </div>
+  <div class="intro-project">
+    <h1>Images</h1>
 
-    <div class="intro-project">
-        <h1>Images</h1>
+    {% set image = repo_data['local_url'] + "/thumbnail.png" %}
 
-        {% set image = repo_data['local_url'] + "/thumbnail.png" %}
-
-        <img src="{{url_for('static', filename=image)}}">
-    </div>
-
-
+    <img src="{{ url_for('static', filename=image) }}" />
+  </div>
 {% endblock %}

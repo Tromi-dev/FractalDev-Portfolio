@@ -1,49 +1,40 @@
 {% extends "base.html" %}
 
-{% block page_name %}About{% endblock %}
-
-{% block head %}
-    <meta property="og:title" content="Peter Cakebread - About" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://fractaldev.co/about" />
-    <meta property="og:image" content="https://fractaldev.co/static/media/MetaBanner.jpg" />
-    <meta property="og:description" content="Hi, I am peter cakebread a software developer and server admin in the UK" />
-    <meta name="theme-color" content="#FF0000">
-    <!-- Include this to make the og:image larger -->
-    <meta name="twitter:card" content="summary_large_image">
-{% endblock %}
+{% block title %}About{% endblock %}
 
 {% block content %}
-    <div class="start-para">
-        <h1>About me</h1>
-        <p>Hi, I am peter cakebread a software developer and server admin in the UK i work on projects such as
-            Ocean Zone and Telepy these are both web projects as that is what I'm mainly focusing on at this time. I enjoy
-            the hardware side of software development, and I am enthusiastic towards the management of my enterprise-grade
-            equipment for server hosting projects and storage. I use my enterprise equipment for an array of applications
-            such as Lucaplex my media server software that runs in the browser but also website hosting services which
-            I am offering.
-        </p>
-        <div class="container-intro">
+  <div class="start-para">
+    <h1>About me</h1>
+    <p>
+      Hi, I am peter cakebread a software developer and server admin in the UK i
+      work on projects such as Ocean Zone and Telepy these are both web projects
+      as that is what I'm mainly focusing on at this time. I enjoy the hardware
+      side of software development, and I am enthusiastic towards the management
+      of my enterprise-grade equipment for server hosting projects and storage.
+      I use my enterprise equipment for an array of applications such as
+      Lucaplex my media server software that runs in the browser but also
+      website hosting services which I am offering.
+    </p>
+    <div class="container-intro">
+      <div class="text" style="padding: 20px">
+        <h1>My skills</h1>
+        <ul>
+          <li>Python development</li>
 
-
-        <div class="text" style="padding: 20px">
-            <h1>My skills</h1>
-            <ul>
-                <li>Python development</li>
-
-                <li>html and css</li>
-                <li>Enterprise Hardware Management and Repair</li>
-                <li>SQl (sqlLite3)</li>
-                <li>Linux CLi</li>
-                <li>(Entry level) Java script</li>
-                <li>(Entry level) React</li>
-
-            </ul>
-        </div>
-            <div class="image" style="padding-top: 2.5%">
-            <img src="{{ url_for('static', filename='media/not_mine.jpg') }}" alt="Placeholder Image">
-        </div>
-
+          <li>html and css</li>
+          <li>Enterprise Hardware Management and Repair</li>
+          <li>SQl (sqlLite3)</li>
+          <li>Linux CLi</li>
+          <li>(Entry level) Java script</li>
+          <li>(Entry level) React</li>
+        </ul>
+      </div>
+      <div class="image" style="padding-top: 2.5%">
+        <img
+          src="{{ url_for('static', filename='media/not_mine.jpg') }}"
+          alt="Placeholder Image"
+        />
+      </div>
     </div>
-    </div>
+  </div>
 {% endblock %}

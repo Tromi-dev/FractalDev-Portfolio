@@ -23,7 +23,7 @@
     />
     <link
       rel="shortcut icon"
-      href="{{ url_for('static', filename='/images/test.png') }}"
+      href="{{ url_for('static', filename='/images/favicon.ico') }}"
       type="image/x-icon"
     />
 
@@ -34,6 +34,22 @@
     <title>{% block title %}Landing{% endblock %} | Peter Cakebread</title>
 
     {% block head %}
+      <meta property="og:title" content="Peter Cakebread - About" />
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="https://fractaldev.co/about" />
+      <meta
+        property="og:image"
+        content="https://fractaldev.co/static/media/cool.jpg"
+      />
+      <meta
+        property="og:description"
+        content="Hi I am a software developer, server hosting and repair technician. I enjoy manging hardware for hosting
+            eg the server running this website, hopefully. I love repairing games consoles and Ipods and restoring to their
+                original condition but some also adding mods like mod chips, custom lights and ssds even to ipods."
+      />
+      <meta name="theme-color" content="#2780e6" />
+      <!-- Include this to make the og:image larger -->
+      <meta name="twitter:card" content="summary_large_image" />
     {% endblock %}
   </head>
   <body>

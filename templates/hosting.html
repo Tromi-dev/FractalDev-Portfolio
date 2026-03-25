@@ -1,55 +1,63 @@
 {% extends "base.html" %}
 
-{% block page_name %}Web Hosting{% endblock %}
+{% block title %}Web Hosting{% endblock %}
 
 {% block head %}
-    <meta property="og:title" content="Peter Cakebread - Webhosting" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://fractaldev.co/webhosting" />
-    <meta property="og:image" content="https://fractaldev.co/static/media/not_mine.jpg" />
-    <meta property="og:description" content="Webhosting by peter cakebread" />
-    <meta name="theme-color" content="#FF0000">
-    <!-- Include this to make the og:image larger -->
-    <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:title" content="Peter Cakebread - Webhosting" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://fractaldev.co/webhosting" />
+  <meta
+    property="og:image"
+    content="https://fractaldev.co/static/media/not_mine.jpg"
+  />
+  <meta property="og:description" content="Webhosting by peter cakebread" />
+  <meta name="theme-color" content="#FF0000" />
+  <!-- Include this to make the og:image larger -->
+  <meta name="twitter:card" content="summary_large_image" />
 {% endblock %}
 
 {% block content %}
-    <div class="title">
-        <h1>Web hosting</h1>
-    </div>
+  <div class="title">
+    <h1>Web hosting</h1>
+  </div>
 
-    <div class="stats">
-        <h1>Lucario's Stats</h1>
-        <h2>{{ uptime }} - Uptime</h2>
-        <h2>{{ cpu_usage }}% - Cpu Usage</h2>
-        <h2>{{ temp }} - Temperature</h2>
-        <p>Server Maintenance occurs on mondays at 1 am</p>
-    </div>
-    
-    <div id="fTelnetContainer" class="fTelnetContainer"></div>
-<div id="fTelnetContainer" class="fTelnetContainer"></div>
-<script>document.write('<script src="//embed-v2.ftelnet.ca/js/ftelnet-loader.norip.noxfer.js?v=' + (new Date()).getTime() + '"><\/script>');</script>
-<script>
+  <div class="stats">
+    <h1>Lucario's Stats</h1>
+    <h2>{{ uptime }} - Uptime</h2>
+    <h2>{{ cpu_usage }}% - Cpu Usage</h2>
+    <h2>{{ temp }} - Temperature</h2>
+    <p>Server Maintenance occurs on mondays at 1 am</p>
+  </div>
+
+  <div id="fTelnetContainer" class="fTelnetContainer"></div>
+  <div id="fTelnetContainer" class="fTelnetContainer"></div>
+  <script>
+    document.write(
+      '<script src="//embed-v2.ftelnet.ca/js/ftelnet-loader.norip.noxfer.js?v=' +
+        new Date().getTime() +
+        '"><\/script>',
+    );
+  </script>
+  <script>
     var Options = new fTelnetOptions();
     Options.BareLFtoCRLF = false;
     Options.BitsPerSecond = 57600;
-    Options.ConnectionType = 'telnet';
-    Options.Emulation = 'ansi-bbs';
-    Options.Enter = '\r\n';
-    Options.Font = 'CP437';
+    Options.ConnectionType = "telnet";
+    Options.Emulation = "ansi-bbs";
+    Options.Enter = "\r\n";
+    Options.Font = "CP437";
     Options.ForceWss = false;
     Options.FullScreenOnConnect = false;
-    Options.Hostname = 'server.fractaldev.co';
+    Options.Hostname = "server.fractaldev.co";
     Options.LocalEcho = true;
     Options.NegotiateLocalEcho = false;
     Options.Port = 2323;
-    Options.ProxyHostname = 'p-eu.ftelnet.ca';
+    Options.ProxyHostname = "p-eu.ftelnet.ca";
     Options.ProxyPort = 80;
     Options.ProxyPortSecure = 443;
     Options.ScreenColumns = 80;
     Options.ScreenRows = 25;
     Options.SendLocation = false;
-    var fTelnet = new fTelnetClient('fTelnetContainer', Options);
-</script>
-
+    var fTelnet = new fTelnetClient("fTelnetContainer", Options);
+  </script>
 {% endblock %}
