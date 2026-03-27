@@ -29,22 +29,22 @@
     <section id="whoAmI" class="page-section">
       {# Mobile —> flex; Desktop —> 2x2 grid #}
       <div class="home-sect-content-wrapper">
-        <h2 class="home-sect-header glass">Who Am I?</h2>
-        <div class="glass image-wrapper">
+        <h2 class="home-sect-header glass museomoderno">Who Am I?</h2>
+        <div class="image-wrapper glass">
           <img
             src="{{ url_for('static', filename='media/server.webp') }}"
             alt="Placeholder image of server"
-            class="home-sect-image"
+            class="home-sect-image montserrat"
           />
         </div>
-        <p class="home-sect-text">
+        <p class="home-sect-text glass montserrat">
           Hi I am a software developer, server hosting and repair technician. I
           enjoy manging hardware for hosting eg the server running this website,
           hopefully. I love repairing games consoles and Ipods and restoring to
           their original condition but some also adding mods like mod chips,
           custom lights and ssds even to ipods.
         </p>
-        <span class="home-sect-cta">
+        <span class="home-sect-cta glass montserrat">
           <a href="{{ url_for('about') }}"></a>
         </span>
       </div>
@@ -52,15 +52,15 @@
 
     <section id="projects" class="page-section">
       <div class="home-sect-content-wrapper">
-        <h2 class="home-sect-header">My Projects</h2>
-        <div class="glass image-wrapper">
+        <h2 class="home-sect-header glass museomoderno">My Projects</h2>
+        <div class="glass image-wrapper glass">
           <img
             src="{{ url_for('static', filename='media/luca.png') }}"
             alt="Placeholder image of example project"
-            class="home-sect-image"
+            class="home-sect-image montserrat"
           />
         </div>
-        <p class="home-sect-text">
+        <p class="home-sect-text glass montserrat">
           I work on serval projects these consist of Lucaplex, Ocean Zone (video
           hosting project), and Telepy. Lucaplex while currently not on Github
           is a software I made which organises all my movies. Ocean Zone will be
@@ -70,7 +70,9 @@
           currently I am planning to work on a web client which will be hosted
           on this site.
         </p>
-        <span class="home-sect-cta"><a href="url_for('projects')"></a></span>
+        <span class="home-sect-cta glass montserrat"
+          ><a href="url_for('projects')"></a
+        ></span>
       </div>
     </section>
   </main>

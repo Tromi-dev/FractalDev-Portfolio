@@ -33,6 +33,17 @@
 
     <title>{% block title %}Landing{% endblock %} | Peter Cakebread</title>
 
+    {# ———————— shoelace.style library cdn ———————— #}
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/light.css"
+    />
+    {# ———— Cherry Picking #}
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/drawer/drawer.js"
+    ></script>
+
     {% block head %}
       <meta property="og:title" content="Peter Cakebread - About" />
       <meta property="og:type" content="website" />
@@ -53,11 +64,12 @@
     {% endblock %}
   </head>
   <body>
-    {# Keeps pre-rendered code, but allows u to determine its location #}
+    {% include 'logo.html' %}
+
     {% macro navbar(links, isHero=False) %}
       <nav id="heroCard" class="museomoderno tinted {{ 'glass' if isHero }}">
-        <section id="nameCard" class="min tinted {{ 'glass' if not isHero }}">
-          {% include 'logo.html' %}
+        <section id="nameCard" class="tinted {{ 'glass' if not isHero }}">
+          {{ logo('stroke') }}
           {# dynamic CSS `content` #}
         </section>
 
@@ -74,8 +86,10 @@
         >
           {{ link_items(links) }}
         </div>
+
+        <div id="fastContacts">{% include 'githubAndLinkedin.html' %}</div>
       </nav>
-    {% endmacro %}
+    {% endmacro navbar %}
 
     {% macro link_items(dict) %}
       {% for link, this in dict.items() %}
@@ -86,7 +100,7 @@
           {{ this['name'] }}
         </a>
       {% endfor %}
-    {% endmacro %}
+    {% endmacro link_items %}
 
     {# ——————————————————————————————————————————————————————————————— #}
 

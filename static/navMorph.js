@@ -7,12 +7,13 @@
   function init() {
     if (cleanup) cleanup();
 
-    const isDesktop = window.matchMedia("(width >= 1000px)").matches;
+    const isDesktop = window.matchMedia("(width >= 1060px)").matches;
     const outerCard = document.getElementById("heroCard");
     const nameCard = document.getElementById("nameCard");
     const itemCard = document.querySelector(
       `.nav-items.${isDesktop ? "desktop" : "mobile"}`,
     );
+    const contacts = document.getElementById("fastContacts");
 
     // Reset ALL state from previous init before measuring
     outerCard.removeAttribute("style");
@@ -62,8 +63,9 @@
       const translateY = -window.innerHeight * 0.42 * morphStage;
       outerCard.style.transform = `translateY(${translateY}px)`;
 
-      outerCard.style.flexDirection =
-        morphStage > (isDesktop ? 0.4 : 0.85) ? "row" : "column";
+      const shouldBeRow = morphStage > 0.4;
+      outerCard.style.flexDirection = shouldBeRow ? "row" : "column";
+      contacts.style.display = shouldBeRow ? "none" : "flex";
 
       const gap = Math.max(0, (morphStage - 0.4) / 0.6) * 40;
       outerCard.style.gap = `${gap}px`;
@@ -87,12 +89,12 @@
       }
     }
 
-    const onScroll = () => {
+    function onScroll() {
       if (!rafPending) {
         rafPending = true;
         requestAnimationFrame(update);
       }
-    };
+    }
 
     window.addEventListener("scroll", onScroll, { passive: true });
 
