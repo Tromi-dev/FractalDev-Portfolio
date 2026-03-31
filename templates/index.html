@@ -13,8 +13,6 @@
   {{ navbar(links, True) }}
 
   <main>
-    {# insert bg video/gif #}
-
     <video class="bg-video" autoplay muted loop playsinline>
       <source
         src="{{ url_for('static', filename='videos/waves_b.mp4') }}"
@@ -71,7 +69,7 @@
           on this site.
         </p>
         <span class="home-sect-cta glass montserrat"
-          ><a href="url_for('projects')"></a
+          ><a href="{{ url_for('projects') }}"></a
         ></span>
       </div>
     </section>

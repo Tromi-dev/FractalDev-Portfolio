@@ -1,3 +1,17 @@
+:root {
+  font-size: 14px;
+
+  --text: #eeedf2;
+  --primary: #572fe9;
+  --backgroud: #090935;
+  --secondary: #569ded;
+  --accent: #eae2a6;
+
+  --breakpoint-max-phone: 800px;
+  --breakpoint-max-tablet: 1060px;
+  --breakpoint-min-4k: 1200px;
+}
+
 html {
   min-height: 100dvh;
   width: 100dvw;
@@ -19,16 +33,6 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-}
-
-:root {
-  font-size: 14px;
-
-  --text: #eeedf2;
-  --primary: #572fe9;
-  --backgroud: #090935;
-  --secondary: #569ded;
-  --accent: #eae2a6;
 }
 
 .museomoderno {
@@ -59,15 +63,16 @@ a {
   --intensity: 0.1;
   background-color: oklch(from white l c h / var(--intensity));
   box-shadow: 8px 8px 4px oklch(from black l c h / calc(var(--intensity) / 2));
-  border: 1px solid oklch(from white l c h / calc(var(--intensity) * 3));
+  border: 1px solid oklch(from white l c h / 35%);
 
   border-radius: 20px;
   padding: 1rem 2rem;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(8px);
 }
 .glass.tinted {
-  --intensity: 0.25;
-  backdrop-filter: blur(8px);
+  --intensity: 0.15;
+  backdrop-filter: blur(12px);
+  border: 1px solid oklch(from white l c h / 75%);
 }
 
 @keyframes bounce {
@@ -87,6 +92,20 @@ a {
   }
   .greyscale {
     filter: grayscale();
+  }
+}
+
+.github-icon-svg,
+.linkedin-icon-svg {
+  height: 1.75em;
+  width: auto;
+
+  .github-icon {
+    fill: var(--text);
+  }
+
+  .linkedin-icon {
+    stroke: var(--text);
   }
 }
 

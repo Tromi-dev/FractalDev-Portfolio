@@ -64,7 +64,7 @@
     {% endblock %}
   </head>
   <body>
-    {% include 'logo.html' %}
+    {% from 'logo.html' import logo %}
 
     {% macro navbar(links, isHero=False) %}
       <nav id="heroCard" class="museomoderno tinted {{ 'glass' if isHero }}">
@@ -87,9 +87,11 @@
           {{ link_items(links) }}
         </div>
 
-        <div id="fastContacts">{% include 'githubAndLinkedin.html' %}</div>
+        <div id="fastContacts" class="{{ 'hide' if not isHero }}">
+          {% include 'githubAndLinkedin.html' %}
+        </div>
       </nav>
-    {% endmacro navbar %}
+    {% endmacro %}
 
     {% macro link_items(dict) %}
       {% for link, this in dict.items() %}
@@ -100,7 +102,7 @@
           {{ this['name'] }}
         </a>
       {% endfor %}
-    {% endmacro link_items %}
+    {% endmacro %}
 
     {# ——————————————————————————————————————————————————————————————— #}
 

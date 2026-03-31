@@ -40,9 +40,21 @@
   &.split {
     flex-direction: row;
     justify-content: space-between;
+    width: 100% !important;
 
     #nameCard {
+      flex-direction: row;
       font-size: 2rem;
+
+      &::after {
+        content: "Peter C";
+        font-size: 2rem;
+        white-space: preserve nowrap;
+        text-overflow: clip;
+      }
+      > svg {
+        height: 2em;
+      }
     }
   }
 }
@@ -64,23 +76,6 @@
     content: "Peter Cakebread";
     line-height: 90%;
     letter-spacing: -0.05em;
-  }
-}
-#heroCard.split {
-  width: 100%;
-
-  #nameCard {
-    flex-direction: row;
-
-    &::after {
-      content: "Peter C";
-      font-size: 2rem;
-      white-space: preserve nowrap;
-      text-overflow: clip;
-    }
-    > svg {
-      height: 2em;
-    }
   }
 }
 
@@ -151,6 +146,10 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
+
+  &.hide {
+    display: none;
+  }
 }
 
 /* * Mobile First */
