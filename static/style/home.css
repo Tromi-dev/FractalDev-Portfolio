@@ -4,7 +4,6 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin: 4rem 0;
 }
 
 #hero {
@@ -22,9 +21,10 @@
   object-fit: cover; /* makes it behave like a background image */
 }
 
-.home-sect-content-wrapper {
-  width: 100%;
+.home-sect-wrapper {
+  width: 90%;
   height: 80%;
+  margin: 4rem 0;
 
   display: flex;
   flex-direction: column;
@@ -64,40 +64,6 @@
   width: 100%;
   object-fit: cover;
   border-radius: 1rem;
-
-  -webkit-mask-image:
-    linear-gradient(
-      to right,
-      transparent 0%,
-      black 5%,
-      black 95%,
-      transparent 100%
-    ),
-    linear-gradient(
-      to bottom,
-      transparent 0%,
-      black 5%,
-      black 95%,
-      transparent 100%
-    );
-  -webkit-mask-composite: destination-in;
-
-  mask-image:
-    linear-gradient(
-      to right,
-      transparent 0%,
-      black 5%,
-      black 95%,
-      transparent 100%
-    ),
-    linear-gradient(
-      to bottom,
-      transparent 0%,
-      black 5%,
-      black 95%,
-      transparent 100%
-    );
-  mask-composite: intersect;
 }
 
 .home-sect-text {
@@ -105,19 +71,30 @@
   grid-area: text;
   align-self: self-start;
   margin: 0;
-  letter-spacing: 0.1em;
-  /* max-height: fit-content; */
 }
 
 .home-sect-cta {
   grid-area: cta;
   align-self: self-end;
   min-height: 4rem;
+  background-color: oklch(from var(--accent) l c h / 50%);
+  text-align: center;
+  color: inherit;
+  letter-spacing: 0.5em;
+
+  transition: transform 150ms ease-in-out;
+
+  &:hover {
+    transform: scale(105%);
+  }
+  &:active {
+    transform: scale(95%);
+  }
 }
 
 @media screen and (width >= 1000px) {
   /* change to grid style */
-  .home-sect-content-wrapper {
+  .home-sect-wrapper {
     display: grid;
     grid-template-areas: "title image" "text image" "text image" "text cta";
     grid-template-columns: repeat(2, 1fr);
@@ -137,7 +114,7 @@
     align-items: center;
     justify-content: center;
   }
-  .home-sect-content-wrapper {
+  .home-sect-wrapper {
     gap: 2rem;
   }
 }

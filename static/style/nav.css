@@ -76,6 +76,7 @@
     content: "Peter Cakebread";
     line-height: 90%;
     letter-spacing: -0.05em;
+    white-space: nowrap;
   }
 }
 

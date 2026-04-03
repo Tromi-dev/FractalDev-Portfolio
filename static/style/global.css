@@ -16,6 +16,7 @@ html {
   min-height: 100dvh;
   width: 100dvw;
   color: var(--text);
+  background-color: var(--backgroud);
 
   scrollbar-width: thin;
   scrollbar-color: currentColor transparent;
@@ -54,9 +55,10 @@ a {
   &.min {
     text-decoration: none;
   }
-  &:visited {
-    color: oklch(from currentColor calc(l - 5) c h);
-  }
+}
+
+p {
+  letter-spacing: 0.1em;
 }
 
 .glass {
@@ -70,9 +72,45 @@ a {
   backdrop-filter: blur(8px);
 }
 .glass.tinted {
-  --intensity: 0.15;
+  --intensity: 0.25;
   backdrop-filter: blur(12px);
   border: 1px solid oklch(from white l c h / 75%);
+}
+
+.glass.image-wrapper img {
+  -webkit-mask-image:
+    linear-gradient(
+      to right,
+      transparent 0%,
+      black 5%,
+      black 95%,
+      transparent 100%
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      black 5%,
+      black 95%,
+      transparent 100%
+    );
+  -webkit-mask-composite: destination-in;
+
+  mask-image:
+    linear-gradient(
+      to right,
+      transparent 0%,
+      black 5%,
+      black 95%,
+      transparent 100%
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      black 5%,
+      black 95%,
+      transparent 100%
+    );
+  mask-composite: intersect;
 }
 
 @keyframes bounce {
@@ -117,18 +155,37 @@ a {
   margin: 4rem 0 2rem;
 
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: space-around;
   flex-wrap: wrap;
+}
 
-  > server {
-    height: 20dvh;
+#contactLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  h1 {
+    font-size: 1em;
+    margin-bottom: 0.25rem;
+  }
+  a {
+    font-size: 0.75em;
   }
 }
+
+#serverStatsModalButton {
+}
+
+/* ———————————————————————— */
 
 @media screen and (width >= 1000px) {
   :root {
     font-size: 16px;
+  }
+
+  #footer {
+    flex-direction: row;
   }
 }

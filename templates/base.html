@@ -31,14 +31,14 @@
     <script defer src="{{url_for('static', filename='script.js')}}"></script> -->
     <script defer src="{{url_for('static', filename='navMorph.js')}}"></script>
 
-    <title>{% block title %}Landing{% endblock %} | Peter Cakebread</title>
+    <title>{% block title required %}{% endblock %} | Peter Cakebread</title>
 
     {# ———————— shoelace.style library cdn ———————— #}
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/light.css"
     />
-    {# ———— Cherry Picking #}
+    {# Component Cherry Picking #}
     <script
       type="module"
       src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/drawer/drawer.js"
@@ -63,8 +63,9 @@
       <meta name="twitter:card" content="summary_large_image" />
     {% endblock %}
   </head>
-  <body>
+  <body class="montserrat">
     {% from 'logo.html' import logo %}
+    {% from 'svgIcons.html' import github_icon, linkedin_icon %}
 
     {% macro navbar(links, isHero=False) %}
       <nav id="heroCard" class="museomoderno tinted {{ 'glass' if isHero }}">
@@ -88,7 +89,8 @@
         </div>
 
         <div id="fastContacts" class="{{ 'hide' if not isHero }}">
-          {% include 'githubAndLinkedin.html' %}
+          {{ github_icon('github-icon') }}
+          {{ linkedin_icon('linkedin-icon') }}
         </div>
       </nav>
     {% endmacro %}
