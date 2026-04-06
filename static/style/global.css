@@ -7,9 +7,7 @@
   --secondary: #569ded;
   --accent: #eae2a6;
 
-  --breakpoint-max-phone: 800px;
-  --breakpoint-max-tablet: 1060px;
-  --breakpoint-min-4k: 1200px;
+  --text-shadow: 0.15em 0.15em 0.15em oklch(from black l c h / 25%);
 }
 
 html {
@@ -61,20 +59,24 @@ p {
   letter-spacing: 0.1em;
 }
 
-.glass {
+.glass,
+/* web awesome specifity overwrites */
+wa-drawer.glass::part(dialog) {
   --intensity: 0.1;
   background-color: oklch(from white l c h / var(--intensity));
   box-shadow: 8px 8px 4px oklch(from black l c h / calc(var(--intensity) / 2));
   border: 1px solid oklch(from white l c h / 35%);
-
   border-radius: 20px;
   padding: 1rem 2rem;
   backdrop-filter: blur(8px);
+  text-shadow: var(--text-shadow);
 }
-.glass.tinted {
+.glass.tinted,
+/* web awesome specifity overwrites */
+wa-drawer.glass.tinted::part(dialog) {
   --intensity: 0.25;
   backdrop-filter: blur(12px);
-  border: 1px solid oklch(from white l c h / 75%);
+  border: 1px solid oklch(from white l c h / 50%);
 }
 
 .glass.image-wrapper img {

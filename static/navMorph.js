@@ -41,38 +41,42 @@
     let rafPending = false;
     let isSplit = false;
 
+    //* —————————————————————————————————
+
     function update() {
       rafPending = false;
 
       const scroll = window.scrollY;
       const morphStage = Math.min(scroll / hero.offsetHeight, 1);
 
+      // ———————— Modify CSS ————————
+      // —— Height
       const height = initialHeight - (initialHeight - finalHeight) * morphStage;
       outerCard.style.height = `${height}px`;
-
+      // —— Width
       if (isDesktop) {
         const finalWidth = window.innerWidth * 0.9;
         const width = initialWidth + (finalWidth - initialWidth) * morphStage;
         outerCard.style.width = `${width}px`;
       }
-
+      // —— FontSize
       const fontSize =
         initialFontSize - (initialFontSize - finalFontSize) * morphStage;
       nameCard.style.fontSize = `${fontSize / rootFontSize}rem`;
-
+      // —— Position
       const translateY = -window.innerHeight * 0.42 * morphStage;
       outerCard.style.transform = `translateY(${translateY}px)`;
-
+      // —— Flex Direction
       const shouldBeRow = morphStage > 0.4;
       outerCard.style.flexDirection = shouldBeRow ? "row" : "column";
       contacts.style.display = shouldBeRow ? "none" : "flex";
-
-      const gap = Math.max(0, (morphStage - 0.4) / 0.6) * 40;
+      // —— Gap
+      const gap = Math.max(14 / 40, (morphStage - 0.4) / 0.6) * 40;
       outerCard.style.gap = `${gap}px`;
+      // ————————————————————————————
 
       const splitThreshold = 0.9;
       const mergeThreshold = 0.85;
-
       const shouldBeSplit = morphStage >= splitThreshold;
       const shouldBeMerged = morphStage < mergeThreshold;
 
@@ -88,6 +92,8 @@
         [nameCard, itemCard].forEach((el) => el.classList.remove("glass"));
       }
     }
+
+    //* —————————————————————————————————
 
     function onScroll() {
       if (!rafPending) {

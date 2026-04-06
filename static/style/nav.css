@@ -1,3 +1,5 @@
+/* * ———— MAIN CARD AND SPLIT NAVBAR ——————————————————————————————————————————— */
+
 #heroCard,
 .nav-items,
 #nameCard {
@@ -20,7 +22,7 @@
   align-items: center;
   justify-content: space-evenly;
   gap: 2rem;
-  text-shadow: 4px 4px 8px oklch(from black l c h / 25%);
+  text-shadow: var(--text-shadow);
   z-index: 9001;
 
   transition:
@@ -40,7 +42,7 @@
   &.split {
     flex-direction: row;
     justify-content: space-between;
-    width: 100% !important;
+    width: 90%;
 
     #nameCard {
       flex-direction: row;
@@ -56,6 +58,13 @@
         height: 2em;
       }
     }
+  }
+}
+
+.split {
+  #nameCard,
+  .nav-items {
+    height: 70%;
   }
 }
 
@@ -76,7 +85,6 @@
     content: "Peter Cakebread";
     line-height: 90%;
     letter-spacing: -0.05em;
-    white-space: nowrap;
   }
 }
 
@@ -86,14 +94,6 @@
   justify-content: center;
   gap: 0.5rem;
   width: max-content;
-}
-
-.split {
-  #nameCard,
-  .nav-items {
-    height: 70%;
-    /* min-height: fit-content; */
-  }
 }
 
 .nav-link {
@@ -174,7 +174,49 @@
   display: none;
 }
 
-/* —— DESKTOP —————————————————————————————————— */
+/* * ———— SIDEBAR MENU ————————————————————————————————————————————————————————— */
+
+wa-drawer {
+  &::part(dialog) {
+    margin-right: 2rem;
+    height: 95dvh;
+    top: 2.5dvh;
+    max-width: 90dvw;
+  }
+  &::part(body) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+  }
+}
+
+.nav-menu-title {
+  text-align: center;
+}
+
+.nave-menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+wa-button.close {
+  width: 100%;
+}
+wa-button.close::part(base) {
+  color: var(--text);
+  width: 100%;
+  border: 1.5px solid var(--text);
+}
+wa-button.close::part(base):hover {
+  color: black;
+  background-color: oklch(from var(--text) l c h / 50%);
+}
+
+/* * ———— MEDIA (DESKTOP +) ———————————————————————————————————————————————————— */
 
 @media screen and (width >= 1060px) {
   .nav-items {
@@ -196,6 +238,7 @@
 
     &:is(.split #nameCard)::after {
       content: "Peter Cakebread";
+      white-space: nowrap;
     }
   }
 }

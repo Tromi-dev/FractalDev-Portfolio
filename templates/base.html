@@ -27,22 +27,31 @@
       type="image/x-icon"
     />
 
-    <!-- <script src="{{url_for('static', filename='default.js')}}"></script>
-    <script defer src="{{url_for('static', filename='script.js')}}"></script> -->
+    <!-- <script src="{{url_for('static', filename='default.js')}}"></script> -->
+    <script defer src="{{url_for('static', filename='script.js')}}"></script>
     <script defer src="{{url_for('static', filename='navMorph.js')}}"></script>
 
     <title>{% block title required %}{% endblock %} | Peter Cakebread</title>
 
-    {# ———————— shoelace.style library cdn ———————— #}
+    {# ———————— webawesome.com Component Library CDN ——————————————————————————————— #}
+
+    <!-- Theme + color palette -->
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/light.css"
+      href="https://ka-f.webawesome.com/webawesome@3.4.0/styles/themes/default.css"
     />
-    {# Component Cherry Picking #}
+    <link
+      rel="stylesheet"
+      href="https://ka-f.webawesome.com/webawesome@3.4.0/styles/color/palettes/bright.css"
+    />
+
+    <!-- Web Awesome autoloader -->
     <script
       type="module"
-      src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/drawer/drawer.js"
+      src="https://ka-f.webawesome.com/webawesome@3.4.0/webawesome.loader.js"
     ></script>
+
+    {# ————————————————————————————————————————————————————————————————————————————— #}
 
     {% block head %}
       <meta property="og:title" content="Peter Cakebread - About" />
@@ -63,23 +72,72 @@
       <meta name="twitter:card" content="summary_large_image" />
     {% endblock %}
   </head>
+
   <body class="montserrat">
     {% from 'logo.html' import logo %}
     {% from 'svgIcons.html' import github_icon, linkedin_icon %}
 
     {% macro navbar(links, isHero=False) %}
+      {# sidebar —————————— #}
+      <wa-drawer
+        label="Drawer"
+        id="navSidebar"
+        without-header
+        class="tinted glass"
+      >
+        <h1 class="museomoderno nav-menu-title">Menu</h1>
+        <div class="nav-menu-list">
+          {{ link_items(links) }}
+          <div>
+            {{ github_icon('github-icon') }}
+            {{ linkedin_icon('linkedin-icon') }}
+          </div>
+        </div>
+
+        <wa-button
+          slot="footer"
+          appearance="outlined"
+          data-drawer="close"
+          class="close"
+        >
+          Close
+        </wa-button>
+      </wa-drawer>
+
+      {# navbar —————————— #}
       <nav id="heroCard" class="museomoderno tinted {{ 'glass' if isHero }}">
         <section id="nameCard" class="tinted {{ 'glass' if not isHero }}">
           {{ logo('stroke') }}
           {# dynamic CSS `content` #}
         </section>
 
-        <div
-          class="nav-items mobile museomoderno tinted {{ 'glass' if not isHero }}"
-        >
+        <div class="nav-items mobile museomoderno NOTGLASS">
           <div class="nav-mobile-list">{{ link_items(links) }}</div>
 
-          <div class="nav-mobile-menu">Menu</div>
+          <div
+            data-drawer="open navSidebar"
+            id="navSidebarOpenButton"
+            class="nav-mobile-menu tinted {{ 'glass' if not isHero }}"
+          >
+            <svg
+              viewbox="0 0 48 48"
+              height="48"
+              width="48"
+              style="filter: drop-shadow(var(--text-shadow));"
+            >
+              {% for i in [10, 24, 38] %}
+                <line
+                  x1="4"
+                  x2="44"
+                  y1="{{ i }}"
+                  y2="{{ i }}"
+                  stroke="var(--text)"
+                  stroke-width="0.33rem"
+                  stroke-linecap="round"
+                />
+              {% endfor %}
+            </svg>
+          </div>
         </div>
 
         <div
