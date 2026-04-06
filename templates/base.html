@@ -73,12 +73,14 @@
     {% endblock %}
   </head>
 
+  {# ———————————————————————————————————————————————————————————————————————————————— #}
+
   <body class="montserrat">
     {% from 'logo.html' import logo %}
     {% from 'svgIcons.html' import github_icon, linkedin_icon %}
 
     {% macro navbar(links, isHero=False) %}
-      {# sidebar —————————— #}
+      {# SIDEBAR —————————— #}
       <wa-drawer
         label="Drawer"
         id="navSidebar"
@@ -86,25 +88,33 @@
         class="tinted glass"
       >
         <h1 class="museomoderno nav-menu-title">Menu</h1>
-        <div class="nav-menu-list">
-          {{ link_items(links) }}
-          <div>
-            {{ github_icon('github-icon') }}
-            {{ linkedin_icon('linkedin-icon') }}
-          </div>
+        <wa-divider class="nav-menu-divider"></wa-divider>
+
+        <div class="nav-menu-list">{{ link_items(links) }}</div>
+
+        <div class="nav-menu-icon-links">
+          <a href="" class="min nav-menu-button">
+            {{ github_icon('nav-menu-git') }}
+            <p>GitHub</p>
+          </a>
+          <a href="" class="min nav-menu-button">
+            {{ linkedin_icon('nav-menu-lin') }}
+            <p>LinkedIn</p>
+          </a>
         </div>
 
         <wa-button
+          pill
           slot="footer"
           appearance="outlined"
           data-drawer="close"
-          class="close"
+          class="nav-menu-button close"
         >
           Close
         </wa-button>
       </wa-drawer>
 
-      {# navbar —————————— #}
+      {# NAVBAR —————————— #}
       <nav id="heroCard" class="museomoderno tinted {{ 'glass' if isHero }}">
         <section id="nameCard" class="tinted {{ 'glass' if not isHero }}">
           {{ logo('stroke') }}
@@ -115,7 +125,6 @@
           <div class="nav-mobile-list">{{ link_items(links) }}</div>
 
           <div
-            data-drawer="open navSidebar"
             id="navSidebarOpenButton"
             class="nav-mobile-menu tinted {{ 'glass' if not isHero }}"
           >

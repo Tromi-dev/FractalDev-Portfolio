@@ -101,7 +101,7 @@
   border-radius: 100px;
   background-color: oklch(from white l c h / 0);
   color: var(--text);
-  font-weight: 400;
+  font-weight: 500;
 
   transition: background-color 300ms ease-in-out;
 
@@ -115,6 +115,9 @@
 
   &:hover {
     background-color: oklch(from currentColor l c h / 25%);
+  }
+  &:active {
+    background-color: oklch(from currentColor l c h / 35%);
   }
 }
 
@@ -178,41 +181,132 @@
 
 wa-drawer {
   &::part(dialog) {
-    margin-right: 2rem;
     height: 95dvh;
-    top: 2.5dvh;
-    max-width: 90dvw;
+    width: 90dvw;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    /* Override for larger screens (tablet+) */
+    @media (min-width: 800px) {
+      top: 2.5dvh;
+      left: auto;
+      right: 0;
+      transform: translateX(-2.5dvh);
+      width: auto;
+
+      aspect-ratio: 2 / 6;
+    }
   }
   &::part(body) {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    padding-bottom: 3rem;
   }
 }
 
 .nav-menu-title {
   text-align: center;
+
+  margin: 40% 0 0;
 }
 
-.nave-menu-list {
+.nav-menu-divider {
+  /* height: 4px; */
+  --color: oklch(from var(--text) l c h / 75%);
+  width: 100%;
+  --spacing: 6rem;
+  --width: 2px;
+}
+
+.nav-menu-list {
+  width: 90%;
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   gap: 1em;
   align-items: center;
   justify-content: space-evenly;
+  font-size: 1.2rem;
+
+  margin-bottom: 3rem;
+
+  .nav-link {
+    text-align: center;
+    width: 100%;
+
+    &:hover {
+      background-color: oklch(from currentColor l c h / 25%);
+    }
+    &:active {
+      background-color: oklch(from currentColor l c h / 35%);
+    }
+  }
 }
 
-wa-button.close {
-  width: 100%;
+.nav-menu-icon-links {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  margin-bottom: 6rem;
+
+  .nav-menu-button {
+    width: 100%;
+    padding: 0 1em;
+    border-radius: 1000px;
+
+    color: var(--text);
+    transition: background-color 300ms ease-in-out;
+
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    justify-content: center;
+
+    p {
+      margin: 0.45em 0.5em 0em 0;
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+
+    &:hover {
+      background-color: oklch(from currentColor l c h / 25%);
+    }
+    &:active {
+      background-color: oklch(from currentColor l c h / 35%);
+    }
+
+    .nav-menu-git {
+      fill: currentColor;
+    }
+    .nav-menu-lin {
+      stroke: currentColor;
+    }
+  }
 }
+
+.nav-menu-button,
+wa-button.nav-menu-button::part(base) {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  letter-spacing: 0.1em;
+}
+
 wa-button.close::part(base) {
   color: var(--text);
-  width: 100%;
-  border: 1.5px solid var(--text);
+  background-color: inherit;
+  border: 2px solid var(--text);
 }
 wa-button.close::part(base):hover {
-  color: black;
+  color: var(--background);
   background-color: oklch(from var(--text) l c h / 50%);
 }
 
