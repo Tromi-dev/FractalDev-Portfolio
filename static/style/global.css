@@ -60,7 +60,7 @@ p {
 }
 
 .glass,
-/* web awesome specifity overwrites */
+/* web awesome specifity overwriting */
 wa-drawer.glass::part(dialog) {
   --intensity: 0.1;
   background-color: oklch(from white l c h / var(--intensity));
@@ -72,7 +72,7 @@ wa-drawer.glass::part(dialog) {
   text-shadow: var(--text-shadow);
 }
 .glass.tinted,
-/* web awesome specifity overwrites */
+/* web awesome specifity overwriting */
 wa-drawer.glass.tinted::part(dialog) {
   --intensity: 0.25;
   backdrop-filter: blur(12px);
@@ -153,14 +153,15 @@ wa-drawer.glass.tinted::part(dialog) {
 
 #footer {
   height: fit-content;
-  width: 90%;
-  margin: 4rem 0 2rem;
-
+  width: 90dvw;
+  margin: 4rem 0 5dvw;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
   flex-wrap: wrap;
+  gap: 1rem;
 }
 
 #contactLinks {
@@ -182,12 +183,14 @@ wa-drawer.glass.tinted::part(dialog) {
 
 /* ———————————————————————— */
 
+@media screen and (width >= 650px) {
+  #footer {
+    flex-direction: row;
+  }
+}
+
 @media screen and (width >= 1000px) {
   :root {
     font-size: 16px;
-  }
-
-  #footer {
-    flex-direction: row;
   }
 }

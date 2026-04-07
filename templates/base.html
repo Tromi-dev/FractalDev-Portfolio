@@ -121,12 +121,15 @@
           {# dynamic CSS `content` #}
         </section>
 
-        <div class="nav-items mobile museomoderno NOTGLASS">
-          <div class="nav-mobile-list">{{ link_items(links) }}</div>
+        <div
+          class="nav-items mobile museomoderno tinted {{ 'glass' if not isHero }}"
+        >
+          <div class="nav-mobile-list ">{{ link_items(links) }}</div>
 
           <div
             id="navSidebarOpenButton"
-            class="nav-mobile-menu tinted {{ 'glass' if not isHero }}"
+            class="nav-mobile-menu"
+            data-drawer="open navSidebar"
           >
             <svg
               viewbox="0 0 48 48"
