@@ -1,13 +1,6 @@
-.page-section {
-  width: 90%;
-
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-
 #hero {
   height: 120dvh;
+  margin: 4rem 0;
 }
 
 .bg-video {
@@ -33,7 +26,7 @@
 
   text-shadow: var(--text-shadow);
 
-  > * {
+  > *:not(.image-wrapper) {
     width: 100%;
     box-sizing: border-box;
   }
@@ -70,6 +63,8 @@
   line-height: 1.25;
   grid-area: text;
   margin: 0;
+  scrollbar-width: thin;
+  font-size: 1rem;
 }
 
 .home-sect-cta {
@@ -82,8 +77,11 @@
   align-items: center;
   font-size: 1.25rem;
   border-radius: 1000px;
-  padding: 0.75em 1.75em;
   transition: transform 150ms ease-in-out;
+
+  width: 99%;
+  padding: 0.5em 1.5em;
+  justify-self: center;
 
   &:hover {
     transform: scale(105%);
@@ -94,36 +92,62 @@
 }
 
 @media screen and (width >= 768px) {
-  /* change to grid style */
   .home-sect-wrapper {
     display: grid;
     grid-template-areas: "title image" "text image" "text image" "text cta";
     grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto 1fr 1fr auto;
 
-    > * {
-      height: 100%;
-      width: inherit;
-    }
+    /* height: fit-content;
+    max-height: 60dvh; */
 
     .home-sect-header,
-    .home-sect-text,
-    .image-wrapper:has(.home-sect-image) {
+    .home-sect-text {
       align-self: self-start;
     }
+
+    .image-wrapper:has(.home-sect-image) {
+      align-self: stretch;
+      height: auto;
+    }
+
+    .home-sect-image {
+      min-height: 0;
+    }
+
+    .image-wrapper:has(.home-sect-image) {
+      position: relative;
+    }
+
+    .image-wrapper,
+    .home-sect-text {
+      min-height: 35dvh;
+      max-height: 60dvh;
+    }
+
+    .home-sect-image {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .home-sect-text {
+      padding: 2em 3em;
+      overflow-y: auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .home-sect-cta {
       align-self: self-end;
     }
   }
 }
-@media screen and (width >= 1200px) {
-  .home-sect-text {
-    align-self: center;
-    justify-self: center;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+@media screen and (width >= 1525px) {
   .home-sect-wrapper {
     gap: 2rem;
   }

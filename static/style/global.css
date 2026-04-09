@@ -16,7 +16,6 @@ html {
   color: var(--text);
   background-color: var(--backgroud);
 
-  scrollbar-width: thin;
   scrollbar-color: currentColor transparent;
 }
 
@@ -59,9 +58,10 @@ p {
   letter-spacing: 0.1em;
 }
 
+/* * —— UNIVERSAL CLASSES ———————— */
+
 .glass,
-/* web awesome specifity overwriting */
-wa-drawer.glass::part(dialog) {
+wa-drawer.glass::part(dialog) /* web-awesome specifity overwriting */ {
   --intensity: 0.1;
   background-color: oklch(from white l c h / var(--intensity));
   box-shadow: 8px 8px 4px oklch(from black l c h / calc(var(--intensity) / 2));
@@ -72,13 +72,11 @@ wa-drawer.glass::part(dialog) {
   text-shadow: var(--text-shadow);
 }
 .glass.tinted,
-/* web awesome specifity overwriting */
-wa-drawer.glass.tinted::part(dialog) {
+wa-drawer.glass.tinted::part(dialog) /* web-awesome specifity overwriting */ {
   --intensity: 0.25;
   backdrop-filter: blur(12px);
   border: 1px solid oklch(from white l c h / 50%);
 }
-
 .glass.image-wrapper img {
   -webkit-mask-image:
     linear-gradient(
@@ -135,21 +133,32 @@ wa-drawer.glass.tinted::part(dialog) {
   }
 }
 
-.github-icon-svg,
-.linkedin-icon-svg {
-  height: 1.75em;
-  width: auto;
-
-  .github-icon {
-    fill: var(--text);
+.button {
+  padding: 0.5rem 1rem;
+  border-radius: 1000px;
+  background-color: inherit;
+  --bgc: none;
+  &:hover {
+    background-color: oklch(from var(--bgc) l c h / 25%);
+  }
+  &:active {
+    background-color: oklch(from var(--bgc) l c h / 35%);
   }
 
-  .linkedin-icon {
-    stroke: var(--text);
+  &.pressable {
+    transition: /* likely be overwritten — include these in new instance */
+      background-color 150ms ease-in-out,
+      scale 300ms ease-in;
+    &:hover {
+      scale: 1.05;
+    }
+    &:active {
+      scale: 0.9;
+    }
   }
 }
 
-/* ———— Footer ———————————— */
+/* * —— FOOTER ———————————— */
 
 #footer {
   height: fit-content;
@@ -181,7 +190,7 @@ wa-drawer.glass.tinted::part(dialog) {
 #serverStatsModalButton {
 }
 
-/* ———————————————————————— */
+/* * —— MEDIA ———————————— */
 
 @media screen and (width >= 650px) {
   #footer {

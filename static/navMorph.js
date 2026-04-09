@@ -66,7 +66,7 @@
       // —— Position
       const translateY = -window.innerHeight * 0.42 * morphStage;
       outerCard.style.transform = `translateY(${translateY}px)`;
-      // —— Flex Direction
+      // —— Flex Direction & icons
       const shouldBeRow = morphStage > 0.4;
       outerCard.style.flexDirection = shouldBeRow ? "row" : "column";
       contacts.style.display = shouldBeRow ? "none" : "flex";
@@ -84,11 +84,13 @@
         isSplit = true;
         outerCard.classList.remove("glass");
         outerCard.classList.add("split");
+
         [nameCard, itemCard].forEach((el) => el.classList.add("glass"));
       } else if (isSplit && shouldBeMerged) {
         isSplit = false;
         outerCard.classList.add("glass");
         outerCard.classList.remove("split");
+
         [nameCard, itemCard].forEach((el) => el.classList.remove("glass"));
       }
     }

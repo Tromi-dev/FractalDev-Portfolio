@@ -80,7 +80,7 @@
     {% from 'svgIcons.html' import github_icon, linkedin_icon %}
 
     {% macro navbar(links, isHero=False) %}
-      {# SIDEBAR —————————— #}
+      {# —— SIDEBAR —————————— #}
       <wa-drawer
         label="Drawer"
         id="navSidebar"
@@ -93,28 +93,26 @@
         <div class="nav-menu-list">{{ link_items(links) }}</div>
 
         <div class="nav-menu-icon-links">
-          <a href="" class="min nav-menu-button">
+          <a href="" class="min nav-menu-button button">
             {{ github_icon('nav-menu-git') }}
             <p>GitHub</p>
           </a>
-          <a href="" class="min nav-menu-button">
+          <a href="" class="min nav-menu-button button">
             {{ linkedin_icon('nav-menu-lin') }}
             <p>LinkedIn</p>
           </a>
         </div>
 
-        <wa-button
-          pill
+        <button
           slot="footer"
-          appearance="outlined"
           data-drawer="close"
-          class="nav-menu-button close"
+          class="nav-menu-button pill button close"
         >
           Close
-        </wa-button>
+        </button>
       </wa-drawer>
 
-      {# NAVBAR —————————— #}
+      {# —— NAVBAR —————————— #}
       <nav id="heroCard" class="museomoderno tinted {{ 'glass' if isHero }}">
         <section id="nameCard" class="tinted {{ 'glass' if not isHero }}">
           {{ logo('stroke') }}
@@ -122,7 +120,7 @@
         </section>
 
         <div
-          class="nav-items mobile museomoderno tinted {{ 'glass' if not isHero }}"
+          class="nav-items mobile museomoderno tinted {{ 'glass' if not isHero }} {# .pressable .button toggled in navMorph #}"
         >
           <div class="nav-mobile-list ">{{ link_items(links) }}</div>
 
@@ -165,11 +163,13 @@
       </nav>
     {% endmacro %}
 
+    {# ———————————————————— #}
+
     {% macro link_items(dict) %}
       {% for link, this in dict.items() %}
         <a
           href="{{ url_for(link) }}"
-          class="nav-link min {{ 'current' if this['active'] }} "
+          class="nav-link min button {{ 'current' if this['active'] }} "
         >
           {{ this['name'] }}
         </a>

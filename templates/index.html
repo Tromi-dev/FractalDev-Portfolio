@@ -13,16 +13,21 @@
 
 {% block content %}
   <main>
-    <video class="bg-video" autoplay muted loop playsinline>
+    <video
+      class="bg-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      id="backgroundVideo"
+    >
       <source
-        src="{{ url_for('static', filename='videos/weeds.mp4') }}"
+        src="{{ url_for('static', filename='videos/funfish.mp4') }}"
         type="video/mp4"
       />
     </video>
 
-    <section id="hero" class="home-sect-wrapper">
-      {{ navbar(links, True) }}
-    </section>
+    <section id="hero">{{ navbar(links, True) }}</section>
 
     <section id="whoAmI" class="home-sect-wrapper">
       {# Mobile —> flex; Desktop —> 4x4 grid #}
@@ -42,7 +47,7 @@
         custom lights and ssds even to ipods.
       </p>
       <a
-        class="home-sect-cta glass museomoderno min"
+        class="home-sect-cta glass museomoderno min pressable button"
         href="{{ url_for('about') }}"
         >Read More About Me</a
       >
@@ -67,7 +72,7 @@
         am planning to work on a web client which will be hosted on this site.
       </p>
       <a
-        class="home-sect-cta glass museomoderno min"
+        class="home-sect-cta glass museomoderno min  pressable button"
         href="{{ url_for('projects') }}"
         >See My Projects</a
       >
