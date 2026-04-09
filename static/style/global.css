@@ -1,11 +1,27 @@
 :root {
+  /* mobile font-size */
   font-size: 14px;
 
-  --text: #eeedf2;
+  /* waves_a */
+  --text: #edeaea;
+  --background: #1e36aa;
+  --primary: #5d96cd;
+  --secondary: #8fc4f6;
+  --accent: #e5b88b;
+
+  /* waves_b */
+  /* --text: #eeedf2;
   --primary: #572fe9;
   --background: #090935;
   --secondary: #569ded;
-  --accent: #eae2a6;
+  --accent: #eae2a6; */
+
+  /* funfish */
+  /* --text: #161616;
+  --background: #52a3a0;
+  --primary: #cd845d;
+  --secondary: #e8e8e8;
+  --accent: #1f5252; */
 
   --text-shadow: 0.15em 0.15em 0.15em oklch(from black l c h / 25%);
 }
@@ -17,6 +33,13 @@ html {
   background-color: var(--backgroud);
 
   scrollbar-color: currentColor transparent;
+
+  *:focus-visible {
+    outline: 4px solid;
+    outline-color: hsl(from var(--accent) h s calc(l + 1));
+    outline-offset: 2px;
+    /* outline already follows border-radius in modern browsers */
+  }
 }
 
 body,
@@ -63,10 +86,11 @@ p {
 .glass,
 wa-drawer.glass::part(dialog) /* web-awesome specifity overwriting */ {
   --intensity: 0.1;
-  background-color: oklch(from white l c h / var(--intensity));
+  background-color: oklch(from var(--secondary) l c h / var(--intensity));
   box-shadow: 8px 8px 4px oklch(from black l c h / calc(var(--intensity) / 2));
   border: 1px solid oklch(from white l c h / 35%);
-  border-radius: 20px;
+
+  border-radius: 1.5rem;
   padding: 1rem 2rem;
   backdrop-filter: blur(8px);
   text-shadow: var(--text-shadow);
@@ -148,12 +172,12 @@ wa-drawer.glass.tinted::part(dialog) /* web-awesome specifity overwriting */ {
   &.pressable {
     transition: /* likely be overwritten — include these in new instance */
       background-color 150ms ease-in-out,
-      scale 300ms ease-in;
+      scale 150ms ease-in;
     &:hover {
       scale: 1.05;
     }
     &:active {
-      scale: 0.9;
+      scale: 0.95;
     }
   }
 }

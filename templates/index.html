@@ -22,36 +22,38 @@
       id="backgroundVideo"
     >
       <source
-        src="{{ url_for('static', filename='videos/funfish.mp4') }}"
+        src="{{ url_for('static', filename='videos/bubbles.mp4') }}"
         type="video/mp4"
       />
     </video>
 
     <section id="hero">{{ navbar(links, True) }}</section>
 
-    <section id="whoAmI" class="home-sect-wrapper">
-      {# Mobile —> flex; Desktop —> 4x4 grid #}
-      <h2 class="home-sect-header glass museomoderno">Who Am I?</h2>
-      <div class="image-wrapper glass">
-        <img
-          src="{{ url_for('static', filename='media/server.webp') }}"
-          alt="Placeholder image of server"
-          class="home-sect-image montserrat"
-        />
-      </div>
-      <p class="home-sect-text glass montserrat">
-        Hi I am a software developer, server hosting and repair technician. I
-        enjoy manging hardware for hosting eg the server running this website,
-        hopefully. I love repairing games consoles and Ipods and restoring to
-        their original condition but some also adding mods like mod chips,
-        custom lights and ssds even to ipods.
-      </p>
-      <a
-        class="home-sect-cta glass museomoderno min pressable button"
-        href="{{ url_for('about') }}"
-        >Read More About Me</a
-      >
-    </section>
+    <div class="page-section">
+      <section id="whoAmI" class="home-sect-wrapper">
+        {# Mobile —> flex; Desktop —> 4x4 grid #}
+        <h2 class="home-sect-header glass museomoderno">Who Am I?</h2>
+        <div class="image-wrapper glass">
+          <img
+            src="{{ url_for('static', filename='media/server.webp') }}"
+            alt="Placeholder image of server"
+            class="home-sect-image montserrat"
+          />
+        </div>
+        <p class="home-sect-text glass montserrat">
+          Hi I am a software developer, server hosting and repair technician. I
+          enjoy manging hardware for hosting eg the server running this website,
+          hopefully. I love repairing games consoles and Ipods and restoring to
+          their original condition but some also adding mods like mod chips,
+          custom lights and ssds even to ipods.
+        </p>
+        <a
+          class="home-sect-cta glass museomoderno min pressable button"
+          href="{{ url_for('about') }}"
+          >Read More About Me</a
+        >
+      </section>
+    </div>
 
     <section id="projects" class="home-sect-wrapper">
       <h2 class="home-sect-header glass museomoderno">My Projects</h2>
@@ -72,7 +74,7 @@
         am planning to work on a web client which will be hosted on this site.
       </p>
       <a
-        class="home-sect-cta glass museomoderno min  pressable button"
+        class="home-sect-cta glass museomoderno min pressable button"
         href="{{ url_for('projects') }}"
         >See My Projects</a
       >

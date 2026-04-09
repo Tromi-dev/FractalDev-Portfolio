@@ -69,7 +69,8 @@
 
 .home-sect-cta {
   grid-area: cta;
-  background-color: oklch(from var(--accent) l c h / 50%);
+  --bgc: oklch(from var(--accent) l c h / 50%);
+  background-color: var(--bgc);
   text-align: center;
   color: inherit;
   letter-spacing: 0.25em;
@@ -77,18 +78,10 @@
   align-items: center;
   font-size: 1.25rem;
   border-radius: 1000px;
-  transition: transform 150ms ease-in-out;
 
-  width: 99%;
+  width: 98%;
   padding: 0.5em 1.5em;
   justify-self: center;
-
-  &:hover {
-    transform: scale(105%);
-  }
-  &:active {
-    transform: scale(95%);
-  }
 }
 
 @media screen and (width >= 768px) {

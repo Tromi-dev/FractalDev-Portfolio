@@ -1,3 +1,3 @@
 (() => {
-  document.getElementById("backgroundVideo").playbackRate = 0.75;
+  document.getElementById("backgroundVideo").playbackRate = 0.5;
 })();
