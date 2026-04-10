@@ -37,7 +37,7 @@ html {
   *:focus-visible {
     outline: 4px solid;
     outline-color: hsl(from var(--accent) h s calc(l + 1));
-    outline-offset: 2px;
+    outline-offset: 4px;
     /* outline already follows border-radius in modern browsers */
   }
 }
@@ -101,38 +101,39 @@ wa-drawer.glass.tinted::part(dialog) /* web-awesome specifity overwriting */ {
   backdrop-filter: blur(12px);
   border: 1px solid oklch(from white l c h / 50%);
 }
+
 .glass.image-wrapper img {
   -webkit-mask-image:
     linear-gradient(
       to right,
-      transparent 0%,
-      black 5%,
-      black 95%,
-      transparent 100%
+      transparent 3%,
+      black 10%,
+      black 90%,
+      transparent 97%
     ),
     linear-gradient(
       to bottom,
-      transparent 0%,
-      black 5%,
-      black 95%,
-      transparent 100%
+      transparent 2.5%,
+      black 12.5%,
+      black 87.5%,
+      transparent 97.5%
     );
   -webkit-mask-composite: destination-in;
 
   mask-image:
     linear-gradient(
       to right,
-      transparent 0%,
-      black 5%,
-      black 95%,
-      transparent 100%
+      transparent 3%,
+      black 10%,
+      black 90%,
+      transparent 97%
     ),
     linear-gradient(
       to bottom,
-      transparent 0%,
-      black 5%,
-      black 95%,
-      transparent 100%
+      transparent 2.5%,
+      black 12.5%,
+      black 87.5%,
+      transparent 97.5%
     );
   mask-composite: intersect;
 }
@@ -160,13 +161,22 @@ wa-drawer.glass.tinted::part(dialog) /* web-awesome specifity overwriting */ {
 .button {
   padding: 0.5rem 1rem;
   border-radius: 1000px;
-  background-color: inherit;
-  --bgc: none;
+
+  --state-bg-color: none;
+  --base-opacity: 0;
+  --bg-color-opacity: var(--base-opacity);
+
+  background-color: hsl(
+    from var(--state-bg-color, inherit) h s calc(l + var(--lightness, 0)) /
+      calc(var(--bg-color-opacity) / 100)
+  );
+
   &:hover {
-    background-color: oklch(from var(--bgc) l c h / 25%);
+    --bg-color-opacity: calc(var(--base-opacity) + 25);
   }
   &:active {
-    background-color: oklch(from var(--bgc) l c h / 35%);
+    --bg-color-opacity: calc(var(--base-opacity) + 45);
+    --lightness: 6;
   }
 
   &.pressable {

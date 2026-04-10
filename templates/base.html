@@ -85,14 +85,16 @@
         label="Drawer"
         id="navSidebar"
         without-header
+        without-footer
         class="tinted glass"
       >
+        <!-- add close icon -->
         <h1 class="museomoderno nav-menu-title">Menu</h1>
         <wa-divider class="nav-menu-divider"></wa-divider>
 
-        <div class="nav-menu-list">{{ link_items(links) }}</div>
+        <div class="nav-menu-list">
+          {{ link_items(links) }}
 
-        <div class="nav-menu-icon-links">
           <a href="" class="min nav-menu-button button">
             {{ github_icon('nav-menu-git') }}
             <p>GitHub</p>
@@ -101,15 +103,11 @@
             {{ linkedin_icon('nav-menu-lin') }}
             <p>LinkedIn</p>
           </a>
-        </div>
 
-        <button
-          slot="footer"
-          data-drawer="close"
-          class="nav-menu-button pill button close"
-        >
-          Close
-        </button>
+          <button data-drawer="close" class="nav-menu-button pill button close">
+            Close
+          </button>
+        </div>
       </wa-drawer>
 
       {# —— NAVBAR —————————— #}

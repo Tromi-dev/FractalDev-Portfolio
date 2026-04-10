@@ -26,7 +26,7 @@
 
   text-shadow: var(--text-shadow);
 
-  > *:not(.image-wrapper) {
+  > */* :not(.image-wrapper) */ {
     width: 100%;
     box-sizing: border-box;
   }
@@ -48,7 +48,7 @@
 }
 
 .image-wrapper:has(.home-sect-image) {
-  padding: 0.5rem;
+  padding: 1.5rem 2rem;
   grid-area: image;
 }
 
@@ -68,20 +68,22 @@
 }
 
 .home-sect-cta {
+  /* sets bg color & opacity for .button —> can be modified consistently across site */
+  --state-bg-color: var(--accent);
+  --base-opacity: 50;
+
   grid-area: cta;
-  --bgc: oklch(from var(--accent) l c h / 50%);
-  background-color: var(--bgc);
+  justify-self: center;
+
   text-align: center;
   color: inherit;
   letter-spacing: 0.25em;
   display: flex;
   align-items: center;
   font-size: 1.25rem;
-  border-radius: 1000px;
 
-  width: 98%;
-  padding: 0.5em 1.5em;
-  justify-self: center;
+  width: 99%;
+  padding: 0.75em 1.25em;
 }
 
 @media screen and (width >= 768px) {
