@@ -11,9 +11,24 @@
   />
 {% endblock %}
 
+{% macro render_skill(label, image_list) %}
+  <li class="skill">
+    {% for i in image_list %}
+      {% set url = '/images/icons/{{i}}.svg' %}
+      <img
+        src="{{ url_for('static', filename=url) }}"
+        alt="{{ i }} logo"
+        class="skill-logo"
+      />
+    {% endfor %}
+    <p class="skill-name">{{ label }}</p>
+  </li>
+{% endmacro %}
+
 {% block content %}
   <main>
     {{ navabar(links) }}
+
     <section class="abt-sect-wrapper">
       <h1 class="abt-sect-header glass museomoderno" id="intro">About Me</h1>
       <p>
@@ -30,35 +45,11 @@
 
     <section class="abt-sect-wrapper" id="skills">
       <h1 class="abt-sect-header glass museomoderno" id="intro">My Skills</h1>
+
       <ul class="skillset">
-        <li class="skill">
-          <img src="" alt="" class="skill-logo" />
-          <p class="skill-name">Python Development</p>
-        </li>
-        <li class="skill">
-          <img src="" alt="" class="skill-logo" />
-          <p class="skill-name">HTML & CSS</p>
-        </li>
-        <li class="skill">
-          <img src="" alt="" class="skill-logo" />
-          <p class="skill-name">Enterprise Hardware Management and Repair</p>
-        </li>
-        <li class="skill">
-          <img src="" alt="" class="skill-logo" />
-          <p class="skill-name">SQL (SQLite3)</p>
-        </li>
-        <li class="skill">
-          <img src="" alt="" class="skill-logo" />
-          <p class="skill-name">Linux CLI</p>
-        </li>
-        <li class="skill">
-          <img src="" alt="" class="skill-logo" />
-          <p class="skill-name">(Entry level) JavaScript</p>
-        </li>
-        <li class="skill">
-          <img src="" alt="" class="skill-logo" />
-          <p class="skill-name">(Entry level) React</p>
-        </li>
+        {% for skill, s in skills_data %}
+          {{ render_skill(skill, s['icon(s)']) }}
+        {% endfor %}
       </ul>
     </section>
   </main>

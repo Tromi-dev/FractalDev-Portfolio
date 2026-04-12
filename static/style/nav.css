@@ -6,6 +6,11 @@
   will-change: transform;
 }
 
+#heroCard.reset,
+#heroCard.reset * {
+  transition: none !important;
+}
+
 #heroCard {
   height: 60dvh;
   width: 70%;
@@ -35,12 +40,6 @@
     transform 0.1s ease-out,
     background-color 0.3s ease-out,
     backdrop-filter 0.1s ease-in-out;
-
-  &.reset,
-  &.reset #nameCard,
-  &.reset .nav-items {
-    transition: none !important;
-  }
 
   &.split {
     flex-direction: row;

@@ -18,7 +18,16 @@ def home():
 def about():
     links = set_active_link("about")
 
-    return render_template("about.html", links=links)
+    skills_data = {
+        "Python Development": {"icon(s)": ["python", "flask"]},
+        "HTML & CSS": {"icon(s)": ["html", "css", "jinja"]},
+        "Enterprise Hardware Management and Repair": {"icon(s)": []},
+        "SQL (SQLite3)": {"icon(s)": ["sqlite"]},
+        "Linux CLI": {"icon(s)": ["linux"]},
+        "JavaScript & React": {"icon(s)": ["javascript", "react"]},
+    }
+
+    return render_template("about.html", links=links, skills_data=skills_data)
 
 
 @app.route("/projects")

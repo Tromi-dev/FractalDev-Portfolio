@@ -7,15 +7,20 @@
   function init() {
     if (cleanup) cleanup();
 
-    const isDesktop = window.matchMedia("(width >= 1060px)").matches;
+    const ViewportIsWiderThan = (width = 1060) =>
+      window.matchMedia(`(width >= ${width}px)`).matches;
+
+    // Get Elements
     const outerCard = document.getElementById("heroCard");
     const nameCard = document.getElementById("nameCard");
     const itemCard = document.querySelector(
-      `.nav-items.${isDesktop ? "desktop" : "mobile"}`,
+      `.nav-items.${ViewportIsWiderThan() ? "desktop" : "mobile"}`,
     );
     const contacts = document.getElementById("fastContacts");
 
     // Reset ALL state from previous init before measuring
+    outerCard.classList.add("reset");
+
     outerCard.removeAttribute("style");
     nameCard.removeAttribute("style");
     outerCard.classList.remove("split");
@@ -23,9 +28,14 @@
     // Reset glass to its correct default for each element
     // outerCard starts with glass (hero state), children without
     outerCard.classList.add("glass");
-    [nameCard, itemCard].forEach((el) => el.classList.remove("glass"));
 
-    // Now measure from clean state
+    // ? combine if safe
+    nameCard.classList.remove("glass");
+    Array(document.querySelectorAll(".nav-items")).forEach((el) =>
+      el.classList.remove("glass"),
+    );
+
+    // Determine values to measure with
     const initialHeight = parseFloat(window.getComputedStyle(outerCard).height);
     const initialWidth =
       parseFloat(window.getComputedStyle(outerCard).width) || 640;
@@ -54,7 +64,7 @@
       const height = initialHeight - (initialHeight - finalHeight) * morphStage;
       outerCard.style.height = `${height}px`;
       // —— Width
-      if (isDesktop) {
+      if (ViewportIsWiderThan(768)) {
         const finalWidth = window.innerWidth * 0.9;
         const width = initialWidth + (finalWidth - initialWidth) * morphStage;
         outerCard.style.width = `${width}px`;
@@ -80,18 +90,28 @@
       const shouldBeSplit = morphStage >= splitThreshold;
       const shouldBeMerged = morphStage < mergeThreshold;
 
+      // * Splits or merges on scroll AND each reload
+      // TODO —> (-- adjust to 1090px) make sure glass is present where needed; ++ add pressable button to hamburger; ++ maybe remove glass from all itemcards for consistency
       if (!isSplit && shouldBeSplit) {
         isSplit = true;
         outerCard.classList.remove("glass");
         outerCard.classList.add("split");
 
         [nameCard, itemCard].forEach((el) => el.classList.add("glass"));
+
+        if (!ViewportIsWiderThan(1060)) {
+          itemCard.classList.add("pressable", "button");
+        }
       } else if (isSplit && shouldBeMerged) {
         isSplit = false;
         outerCard.classList.add("glass");
         outerCard.classList.remove("split");
 
         [nameCard, itemCard].forEach((el) => el.classList.remove("glass"));
+
+        if (!ViewportIsWiderThan(1060)) {
+          itemCard.classList.remove("pressable", "button");
+        }
       }
     }
 
@@ -106,9 +126,10 @@
 
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    outerCard.classList.add("reset");
     update();
-    requestAnimationFrame(() => outerCard.classList.remove("reset"));
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => outerCard.classList.remove("reset")),
+    );
 
     cleanup = () => window.removeEventListener("scroll", onScroll);
   }
@@ -117,7 +138,7 @@
   let resizeTimer = null;
   window.addEventListener("resize", () => {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(init, 50);
+    resizeTimer = setTimeout(init, 80);
   });
 
   init();

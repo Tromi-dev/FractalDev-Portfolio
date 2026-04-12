@@ -1,7 +1,4 @@
 :root {
-  /* mobile font-size */
-  font-size: 14px;
-
   /* waves_a */
   --text: #edeaea;
   --background: #1e36aa;
@@ -235,5 +232,23 @@ wa-drawer.glass.tinted::part(dialog) /* web-awesome specifity overwriting */ {
 @media screen and (width >= 1000px) {
   :root {
     font-size: 16px;
+  }
+}
+
+:root {
+  /* mobile */
+  font-size: 12px;
+
+  /* vertical tablet */
+  @media screen and (width >= 768px) {
+    font-size: 14px;
+  }
+  /* small desktop / laptop */
+  @media screen and (width >= 1060px) {
+    font-size: 16px;
+  }
+  /* large desktop */
+  @media screen and (width >= 1700px) {
+    font-size: 18px;
   }
 }
