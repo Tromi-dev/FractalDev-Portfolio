@@ -17,47 +17,125 @@
   <meta name="theme-color" content="#FF0000" />
   <!-- Include this to make the og:image larger -->
   <meta name="twitter:card" content="summary_large_image" />
+
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='/style/projects.css') }}"
+  />
 {% endblock %}
 
 {% block content %}
-  <div class="title">
-    <h1>Projects</h1>
-  </div>
+  <main>
+    <h1 class="glass museomoderno">My Projects</h1>
+    <section id="projectFilterUI">
+      <!-- search, filter, sort -->
+      <!-- search take min 50%, convert rest to modal if too wide -->
+      <form onchange="testChange()">
+        <input id="projectSearch" type="text" />
+        <wa-dropdown id="projectSort">
+          <wa-button appearance="filled" slot="trigger" with-caret
+            >Edit</wa-button
+          >
+          <wa-dropdown-item value="cut">
+            <wa-icon slot="icon" name="scissors"></wa-icon>
+            Cut
+          </wa-dropdown-item>
+          <wa-dropdown-item value="copy">
+            <wa-icon slot="icon" name="copy"></wa-icon>
+            Copy
+          </wa-dropdown-item>
+          <wa-dropdown-item value="paste">
+            <wa-icon slot="icon" name="paste"></wa-icon>
+            Paste
+          </wa-dropdown-item>
+          <wa-dropdown-item value="delete" variant="danger">
+            <wa-icon slot="icon" name="trash"></wa-icon>
+            Delete
+          </wa-dropdown-item>
+        </wa-dropdown>
+      </form>
+    </section>
 
-  <div class="projects">
-    <div class="ui link cards">
-      {% for repo in repos %}
-        <div id="cool-card" class="ui card">
-          <a class="image" href="{{ repo["page_url"] }}">
-            {% set image = repo['local_url'] + "/thumbnail.png" %}
+    <section id="projectCards">
+      {% from 'svgIcons.html' import git_watch_icon %}
 
-            <img src="{{ url_for('static', filename=image) }}" />
+      {% macro get_date(time) %}
+        {{ time[:10] }}
+      {% endmacro %}
+
+      {% if repos['repos'] %}
+        {% for r in repos['repos'] %}
+          <a href="{{ r['page_url'] }}">
+            <article class="project-card montserrat">
+              {% set img_url = "/{{r['local_url']}}/thumbnail.png" %}
+              <img
+                src="{{ url_for('static', filename=img_url) }}"
+                alt="project image"
+              />
+
+              {# Text Content #}
+              <h2>{{ r['name'] }}</h2>
+
+              <span class="project-counter-wrapper">
+                <div
+                  class="project-counter"
+                  id="{{ loop.index }}CounterWatchers"
+                >
+                  {{ git_watch_icon() }} {{ r['watchers'] }}
+                </div>
+                <div class="project-counter" id="{{ loop.index }}CounterForks">
+                  <wa-icon
+                    name="code-fork"
+                    style="color: rgb(237, 234, 234);"
+                    variant="regular"
+                  ></wa-icon>
+                  {{ r['forks_count'] }}
+                </div>
+              </span>
+
+              <span class="project-time-wrapper">
+                <div
+                  class="project-time updated"
+                  id="{{ loop.index }}TimeUpdated"
+                >
+                  <wa-icon
+                    name="cloud-arrow-up"
+                    style="color: rgb(237, 234, 234);"
+                  ></wa-icon>
+                  {{ get_date(r['updated_at']) }}
+                </div>
+                <div
+                  class="project-time created"
+                  id="{{ loop.index }}TimeCreated"
+                >
+                  <wa-icon
+                    name="backward-fast"
+                    style="color: rgb(237, 234, 234);"
+                  ></wa-icon>
+                  {{ get_date(r['created_at']) }}
+                </div>
+              </span>
+            </article>
           </a>
-          <div class="content">
-            <a class="header" href="{{ repo["page_url"] }}"
-              >{{ repo['name'] }}</a
-            >
-            <div class="meta">
-              {% set subtext = "Watchers: " + repo['watchers'] + "  Forks: " + repo["forks_count"] %}
-              <a>{{ subtext }}</a>
-            </div>
-            <div class="description">{{ repo["description"] }}</div>
-          </div>
-          <div class="extra content">
-            <span class="right floated">
-              {% set update = repo["updated_at"][:10] %} Updated at:<br />
-              {{ update }}
-            </span>
-            <span>
-              {% set create = repo["created_at"][:10] %} Created At:<br />
-              {{ create }}
-            </span>
-          </div>
-        </div>
-      {% endfor %}
-    </div>
-  </div>
-  <div class="projects_footer">
+        {% endfor %}
+      {% else %}
+        <section class="error-block">
+          <h1>I have projects ..I swear!</h1>
+          <p>Try again later and maybe they'll show up.</p>
+
+          {% set err = repos['error'] %}
+          {% if err and err['message'] %}
+            <p>
+              Reason they left: <wbr />{{ err['message'] }} <wbr />
+              {{ "(Status " + err['status'] + ")" if err['status'] }}
+            </p>
+          {% endif %}
+        </section>
+      {% endif %}
+    </section>
+  </main>
+
+  <!-- <div class="projects_footer">
     <h1>All of my projects are on GitHub</h1>
     <p>Some Projects may not be on here as this page updates daily</p>
     <div
@@ -68,5 +146,5 @@
       data-theme="default"
     ></div>
     <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
-  </div>
+  </div> -->
 {% endblock %}

@@ -14,24 +14,36 @@
   <meta name="theme-color" content="#FF0000" />
   <!-- Include this to make the og:image larger -->
   <meta name="twitter:card" content="summary_large_image" />
+
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='/style/contact.css') }}"
+  />
 {% endblock %}
 
 {% block content %}
   <main>
     <section class="sect-wrapper montserrat">
-      <h1 class="glass museomoderno">Contact</h1>
-      <p class="glass">
-        If you would like to get in touch for any reason email me at
-        <a href="mailto:peterjcakebread@gmail.com">
-          peterjcakebread@gmail.com</a
-        >
-        <br />If you would like my cv email me at the appropriate email address.
-        <br />
-        (I should respond within a day. If I don't I apologise in advance and
-        try sending another)
-      </p>
+      <div class="text-content">
+        <h1 class="glass museomoderno">Contact</h1>
+        <p class="glass">
+          If you would like to get in touch for any reason email me at
+          <a href="mailto:peterjcakebread@gmail.com">
+            peterjcakebread@gmail.com</a
+          >
+          <br />If you would like my cv email me at the appropriate email
+          address.
+          <br />
+          (I should respond within a day. If I don't I apologise in advance and
+          try sending another)
+        </p>
+      </div>
+      <div class="glass image-wrapper">
+        <img src="{# insert relevant image #}" alt="" />
+      </div>
     </section>
-    <section class="sect-wrapper montserrat">
+
+    <section class="sect-wrapper montserrat" id="contacts">
       <div class="contact"><img src="" alt="Email Icon" />Email</div>
       <div class="contact">
         <div
@@ -45,39 +57,4 @@
       </div>
     </section>
   </main>
-  <!-- 
-  <div class="container-intro">
-    <div class="text" style="padding: 20px">
-      <h1>Contact</h1>
-      <p>
-        If you would like to get in touch for any reason email me at
-        <a href="mailto:peterjcakebread@gmail.com">
-          peterjcakebread@gmail.com</a
-        >
-        <br />If you would like my cv email me at the appropriate email address.
-        <br />
-        (I should respond within a day. If I don't I apologise in advance and
-        try sending another)
-      </p>
-    </div>
-
-    <div class="image">
-      <h1>Email</h1>
-      <p>
-        <a href="mailto:peterjcakebread@gmail.com">peterjcakebread@gmail.com</a>
-        <br />(all inquires) <br />
-      </p>
-
-      <h1>Git Hub</h1>
-
-      <div
-        class="github-card"
-        data-github="Mos6502DIP"
-        data-width="400"
-        data-height=""
-        data-theme="default"
-      ></div>
-      <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
-    </div>
-  </div> -->
 {% endblock %}

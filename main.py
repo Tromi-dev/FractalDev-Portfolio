@@ -88,10 +88,10 @@ def get_github_repos():
         # Store the data in the cache with an expiration time of 24 hours
         cache.set(USERNAME, sorted_repos, expire=3600)  # 24 hours
 
-        return sorted_repos
+        return {"repos": sorted_repos, "error": None}
     else:
-        print(f"Error: {response.status_code}, {response.text}")
-        return None
+        print(f"Error: {response.status_code} at get_github_repos(), {response.text}")
+        return {"repos": None, "error": eval(response.text)}
 
 
 # Main function to clone/update all repositories
@@ -138,16 +138,22 @@ def get_repo(repos, name):
             return repo
 
 
-def reformat(repos):
-    for repo in repos:
-        repo["local_url"] = "github_cache/" + repo["name"]
-        repo["page_url"] = "/projects/" + repo["name"]
-        repo["watchers"] = str(repo["watchers"])
-        repo["forks_count"] = str(repo["forks_count"])
+def reformat(data):
+    try:
+        for repo in data["repos"]:
+            repo["local_url"] = "github_cache/" + repo["name"]
+            repo["page_url"] = "/projects/" + repo["name"]
+            repo["watchers"] = str(repo["watchers"])
+            repo["forks_count"] = str(repo["forks_count"])
 
-        print(repo["local_url"])
-
-    return repos
+            print(repo["local_url"])
+    except TypeError:
+        pass  # err should already be assigned in get_github_repos()
+    except Exception as err:
+        data["error"] = err
+    finally:
+        print(data)
+        return data
 
 
 def list_repo(repos):

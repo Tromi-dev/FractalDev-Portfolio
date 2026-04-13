@@ -21,7 +21,7 @@ def about():
     skills_data = {
         "Python Development": {"icon(s)": ["python", "flask"]},
         "HTML & CSS": {"icon(s)": ["html", "css", "jinja"]},
-        "Enterprise Hardware Management and Repair": {"icon(s)": []},
+        "Enterprise Hardware Management and Repair": {"icon(s)": ["hardDrive"]},
         "SQL (SQLite3)": {"icon(s)": ["sqlite"]},
         "Linux CLI": {"icon(s)": ["linux"]},
         "JavaScript & React": {"icon(s)": ["javascript", "react"]},
@@ -34,8 +34,8 @@ def about():
 def projects():
     links = set_active_link("projects")
 
-    repos = reformat(get_github_repos())
-    return render_template("projects.html", repos=repos, links=links)
+    repo_obj = reformat(get_github_repos())
+    return render_template("projects.html", repos=repo_obj, links=links)
 
 
 @app.route("/projects/<name>")
