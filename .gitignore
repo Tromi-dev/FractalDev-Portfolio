@@ -5,6 +5,7 @@ package.json
 .vscode
 
 .env
+__pycache__
 templates/cache_directory/45/cd/4fa734b5dfb20ea4b8db86ee74e2.val
 templates/cache_directory/cache.db
 templates/cache_directory/cache.db-shm
