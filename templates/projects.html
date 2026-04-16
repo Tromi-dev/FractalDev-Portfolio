@@ -22,6 +22,7 @@
     rel="stylesheet"
     href="{{ url_for('static', filename='/style/projects.css') }}"
   />
+  <script src="{{url_for('static', filename='/projects.js')}}"></script>
 {% endblock %}
 
 {% block content %}
@@ -30,27 +31,53 @@
     <section id="projectFilterUI">
       <!-- search, filter, sort -->
       <!-- search take min 50%, convert rest to modal if too wide -->
-      <form onchange="testChange()">
+      <form>
         <input id="projectSearch" type="text" />
+
         <wa-dropdown id="projectSort">
-          <wa-button appearance="filled" slot="trigger" with-caret
-            >Edit</wa-button
-          >
-          <wa-dropdown-item value="cut">
-            <wa-icon slot="icon" name="scissors"></wa-icon>
-            Cut
+          <wa-button appearance="filled" slot="trigger" with-caret>
+            Edit
+          </wa-button>
+
+          <wa-dropdown-item type="checkbox" value="alphabet" checked>
+            Alphabetical
           </wa-dropdown-item>
-          <wa-dropdown-item value="copy">
-            <wa-icon slot="icon" name="copy"></wa-icon>
-            Copy
+          <wa-dropdown-item type="checkbox" value="update">
+            Last Updated
           </wa-dropdown-item>
-          <wa-dropdown-item value="paste">
-            <wa-icon slot="icon" name="paste"></wa-icon>
-            Paste
+          <wa-dropdown-item type="checkbox" value="create">
+            Creation
           </wa-dropdown-item>
-          <wa-dropdown-item value="delete" variant="danger">
-            <wa-icon slot="icon" name="trash"></wa-icon>
-            Delete
+          <wa-dropdown-item type="checkbox" value="fork">
+            Forks
+          </wa-dropdown-item>
+          <wa-dropdown-item type="checkbox" value="watch">
+            Watchers
+          </wa-dropdown-item>
+          <wa-divider></wa-divider>
+          <wa-dropdown-item>
+            Order
+            <wa-dropdown-item
+              slot="submenu"
+              type="checkbox"
+              value="ascending"
+              id="ascending"
+              class="order"
+              checked
+            >
+              <wa-icon slot="icon" name="arrow-down-short-wide"></wa-icon>
+              Ascending
+            </wa-dropdown-item>
+            <wa-dropdown-item
+              slot="submenu"
+              type="checkbox"
+              value="descending"
+              id="descending"
+              class="order"
+            >
+              <wa-icon slot="icon" name="arrow-down-wide-short"></wa-icon>
+              Descending
+            </wa-dropdown-item>
           </wa-dropdown-item>
         </wa-dropdown>
       </form>
@@ -63,27 +90,30 @@
         {{ time[:10] }}
       {% endmacro %}
 
-      {% if repos['repos'] %}
-        {% for r in repos['repos'] %}
-          <a href="{{ r['page_url'] }}">
-            <article class="project-card montserrat">
-              {% set img_url = "/{{r['local_url']}}/thumbnail.png" %}
+      {% set projects = repos['repos'] %}
+      {% if projects %}
+        {% for p in projects %}
+          <a href="{{ p['page_url'] }}">
+            <article
+              class="project-card montserrat"
+              {% for attr in p %}
+                data-{{ attr }}="{{ p[attr] }}"
+              {% endfor %}
+            >
+              {% set img_url = "/{{p['local_url']}}/thumbnail.png" %}
               <img
                 src="{{ url_for('static', filename=img_url) }}"
                 alt="project image"
               />
 
               {# Text Content #}
-              <h2>{{ r['name'] }}</h2>
+              <h2>{{ p['name'] }}</h2>
 
               <span class="project-counter-wrapper">
-                <div
-                  class="project-counter"
-                  id="{{ loop.index }}CounterWatchers"
-                >
-                  {{ git_watch_icon() }} {{ r['watchers'] }}
+                <div class="project-counter">
+                  {{ git_watch_icon() }} {{ p['watchers'] }}
                 </div>
-                <div class="project-counter" id="{{ loop.index }}CounterForks">
+                <div class="project-counter">
                   <wa-icon
                     name="code-fork"
                     style="color: rgb(237, 234, 234);"
@@ -94,25 +124,19 @@
               </span>
 
               <span class="project-time-wrapper">
-                <div
-                  class="project-time updated"
-                  id="{{ loop.index }}TimeUpdated"
-                >
+                <div class="project-time updated">
                   <wa-icon
                     name="cloud-arrow-up"
                     style="color: rgb(237, 234, 234);"
                   ></wa-icon>
-                  {{ get_date(r['updated_at']) }}
+                  {{ get_date(p['updated_at']) }}
                 </div>
-                <div
-                  class="project-time created"
-                  id="{{ loop.index }}TimeCreated"
-                >
+                <div class="project-time created">
                   <wa-icon
                     name="backward-fast"
                     style="color: rgb(237, 234, 234);"
                   ></wa-icon>
-                  {{ get_date(r['created_at']) }}
+                  {{ get_date(p['created_at']) }}
                 </div>
               </span>
             </article>
