@@ -35,6 +35,7 @@ def projects():
     links = set_active_link("projects")
 
     repo_obj = reformat(get_github_repos())
+
     return render_template("projects.html", repos=repo_obj, links=links)
 
 

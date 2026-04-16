@@ -72,7 +72,7 @@ def get_github_repos():
     cached_data = cache.get(USERNAME)
     if cached_data is not None:
         print("Using cached data")
-        return cached_data
+        return {"repos": cached_data, "error": None}
 
     # Set the headers for authentication
     headers = {"Authorization": f"token {TOKEN}"}
@@ -147,12 +147,9 @@ def reformat(data):
             repo["forks_count"] = str(repo["forks_count"])
 
             print(repo["local_url"])
-    except TypeError:
-        pass  # err should already be assigned in get_github_repos()
     except Exception as err:
         data["error"] = err
     finally:
-        print(data)
         return data
 
 

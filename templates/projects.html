@@ -93,7 +93,7 @@
       {% set projects = repos['repos'] %}
       {% if projects %}
         {% for p in projects %}
-          <a href="{{ p['page_url'] }}">
+          <a href="{{ p['page_url'] }}" class="min">
             <article
               class="project-card montserrat"
               {% for attr in p %}
