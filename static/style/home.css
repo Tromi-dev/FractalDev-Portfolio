@@ -112,9 +112,10 @@
 
     .image-wrapper:has(.home-sect-image) {
       position: relative;
+      border-radius: 1000px;
     }
 
-    .image-wrapper,
+    .image-wrapper:has(.home-sect-image),
     .home-sect-text {
       min-height: 35dvh;
       max-height: 60dvh;
@@ -126,6 +127,7 @@
       height: 100%;
       width: 100%;
       object-fit: cover;
+      border-radius: 1000px;
     }
 
     .home-sect-text {

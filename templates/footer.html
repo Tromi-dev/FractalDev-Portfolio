@@ -1,5 +1,9 @@
-<footer id="footer" class="glass montserrat">
-  {{ logo(class='stroke greyscale') }}
+<footer id="footer" class="glass baloo-da-2">
+  <img
+    class="logo"
+    src="{{ url_for('static', filename='/images/subtract.png') }}"
+    alt="FractalDev logo"
+  />
 
   <section id="contactLinks">
     {# maybe make an email form #}
@@ -12,16 +16,12 @@
     >
   </section>
 
-  <section id="services">
-    <a href="https://www.vecteezy.com/free-videos/bubbles"
-      >Bubbles Stock Videos by Vecteezy</a
-    >
-  </section>
+  <section id="services"></section>
 
   <button
     type="button"
     id="serverStatsModalButton"
-    class="glass montserrat button"
+    class="glass baloo-da-2 button"
   >
     See Server Stats
   </button>

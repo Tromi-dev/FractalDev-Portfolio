@@ -27,7 +27,7 @@
 
 {% block content %}
   <main>
-    <h1 class="glass museomoderno">My Projects</h1>
+    <h1 class="glass besley">My Projects</h1>
     <section id="projectFilterUI">
       <!-- search, filter, sort -->
       <!-- search take min 50%, convert rest to modal if too wide -->
@@ -95,7 +95,7 @@
         {% for p in projects %}
           <a href="{{ p['page_url'] }}" class="min">
             <article
-              class="project-card montserrat"
+              class="project-card baloo-da-2 glass image-wrapper"
               {% for attr in p %}
                 data-{{ attr }}="{{ p[attr] }}"
               {% endfor %}
@@ -106,10 +106,15 @@
                 alt="project image"
               />
 
-              {# Text Content #}
-              <h2>{{ p['name'] }}</h2>
+              <span class="main-project-info">
+                <h2>{{ p['name'] }}</h2>
 
-              <span class="project-counter-wrapper">
+                <div class="project-time updated">
+                  {{ get_date(p['updated_at']) }}
+                </div>
+              </span>
+
+              <span class="project-github-counters">
                 <div class="project-counter">
                   {{ git_watch_icon() }} {{ p['watchers'] }}
                 </div>
@@ -120,23 +125,6 @@
                     variant="regular"
                   ></wa-icon>
                   {{ p['forks_count'] }}
-                </div>
-              </span>
-
-              <span class="project-time-wrapper">
-                <div class="project-time updated">
-                  <wa-icon
-                    name="cloud-arrow-up"
-                    style="color: rgb(237, 234, 234);"
-                  ></wa-icon>
-                  {{ get_date(p['updated_at']) }}
-                </div>
-                <div class="project-time created">
-                  <wa-icon
-                    name="backward-fast"
-                    style="color: rgb(237, 234, 234);"
-                  ></wa-icon>
-                  {{ get_date(p['created_at']) }}
                 </div>
               </span>
             </article>

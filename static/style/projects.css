@@ -1,0 +1,57 @@
+#projectCards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+
+  height: fit-content;
+  min-height: 50dvh;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 4rem;
+  aspect-ratio: 4 / 3;
+  padding: 1rem;
+}
+
+.project-card > img {
+  height: 2rem;
+  aspect-ratio: 4/3;
+  border-radius: calc(100px - 1rem);
+}
+
+.main-project-info,
+.project-github-counters {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  > h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: -0.1em;
+  }
+
+  .project-counter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.1em;
+  }
+}
+
+.watch-icon,
+wa-icon::part(base) {
+  width: auto;
+  height: 0.9em;
+
+  --color: currentColor;
+  path {
+    fill: currentColor;
+  }
+}

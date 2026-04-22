@@ -3,13 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {# add opengraph #}
 
-    {# Fonts — MuseoModerno & Montserrat #}
+    {# Fonts — Besley & Baloo Da 2 #}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400..800&family=Besley:ital,wght@0,400..900;1,400..900&display=swap"
       rel="stylesheet"
     />
 
@@ -23,7 +22,7 @@
     />
     <link
       rel="shortcut icon"
-      href="{{ url_for('static', filename='/images/favicon.ico') }}"
+      href="{{ url_for('static', filename='/images/logo.png') }}"
       type="image/x-icon"
     />
 
@@ -51,8 +50,6 @@
       src="https://ka-f.webawesome.com/webawesome@3.4.0/webawesome.loader.js"
     ></script>
 
-    {# ————————————————————————————————————————————————————————————————————————————— #}
-
     {% block head %}
       <meta property="og:title" content="Peter Cakebread - About" />
       <meta property="og:type" content="website" />
@@ -73,114 +70,124 @@
     {% endblock %}
   </head>
 
+  {% from 'svgIcons.html' import github_icon, linkedin_icon %}
+
+  {% macro navbar(links, isHero=False) %}
+    {# —— NAVBAR —————————— #}
+    <nav id="heroCard" class="besley tinted {{ 'glass' if isHero }}">
+      <section id="nameCard" class="tinted {{ 'glass' if not isHero }}">
+        <div class="nav-logo-wrapper ">
+          <img
+            class="logo"
+            src="{{ url_for('static', filename='/images/logo.png') }}"
+            alt="FractalDev logo"
+          />
+        </div>
+        {# dynamic CSS `content` #}
+      </section>
+
+      {# .pressable .button toggled in navMorph #}
+      <div class="nav-items mobile besley tinted {{ 'glass' if not isHero }}">
+        <div class="nav-mobile-list ">{{ link_items(links) }}</div>
+
+        <div
+          id="navSidebarOpenButton"
+          class="nav-mobile-menu"
+          data-drawer="open navSidebar"
+        >
+          <svg
+            viewbox="0 0 48 48"
+            height="48"
+            width="48"
+            style="filter: drop-shadow(var(--text-shadow));"
+          >
+            {% for i in [10, 24, 38] %}
+              <line
+                x1="4"
+                x2="44"
+                y1="{{ i }}"
+                y2="{{ i }}"
+                stroke="var(--text)"
+                stroke-width="0.33rem"
+                stroke-linecap="round"
+              />
+            {% endfor %}
+          </svg>
+        </div>
+      </div>
+
+      <div class="nav-items desktop besley tinted {{ 'glass' if not isHero }}">
+        {{ link_items(links) }}
+      </div>
+
+      <div id="fastContacts" class="{{ 'hide' if not isHero }}">
+        {{ github_icon('github-icon') }}
+        {{ linkedin_icon('linkedin-icon') }}
+      </div>
+    </nav>
+
+    {# —— SIDEBAR —————————— #}
+    <wa-drawer
+      label="Drawer"
+      id="navSidebar"
+      without-header
+      without-footer
+      class="tinted glass"
+    >
+      <!-- add close icon -->
+      <h1 class="besley nav-menu-title">Menu</h1>
+      <wa-divider class="nav-menu-divider"></wa-divider>
+
+      <div class="nav-menu-list">
+        {{ link_items(links) }}
+
+        <a href="" class="min nav-menu-button button">
+          {{ github_icon('nav-menu-git') }}
+          <p>GitHub</p>
+        </a>
+        <a href="" class="min nav-menu-button button">
+          {{ linkedin_icon('nav-menu-lin') }}
+          <p>LinkedIn</p>
+        </a>
+
+        <button data-drawer="close" class="nav-menu-button pill button close">
+          Close
+        </button>
+      </div>
+    </wa-drawer>
+  {% endmacro %}
+
+  {% macro link_items(dict) %}
+    {% for link, this in dict.items() %}
+      <a
+        href="{{ url_for(link) }}"
+        class="nav-link min button {{ 'current' if this['active'] }} "
+      >
+        {{ this['name'] }}
+      </a>
+    {% endfor %}
+  {% endmacro %}
+
   {# ———————————————————————————————————————————————————————————————————————————————— #}
 
-  <body class="montserrat">
-    {% from 'logo.html' import logo %}
-    {% from 'svgIcons.html' import github_icon, linkedin_icon %}
+  <body class="baloo-da-2">
+    <video
+      class="bg-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      id="backgroundVideo"
+      {% block video_style %}style="filter:blur(0px)"{% endblock %}
+    >
+      <source
+        src="{{ url_for('static', filename='videos/clouds.mp4') }}"
+        type="video/mp4"
+      />
+    </video>
 
-    {% macro navbar(links, isHero=False) %}
-      {# —— SIDEBAR —————————— #}
-      <wa-drawer
-        label="Drawer"
-        id="navSidebar"
-        without-header
-        without-footer
-        class="tinted glass"
-      >
-        <!-- add close icon -->
-        <h1 class="museomoderno nav-menu-title">Menu</h1>
-        <wa-divider class="nav-menu-divider"></wa-divider>
+    <main>{% block content %}{% endblock %}</main>
 
-        <div class="nav-menu-list">
-          {{ link_items(links) }}
-
-          <a href="" class="min nav-menu-button button">
-            {{ github_icon('nav-menu-git') }}
-            <p>GitHub</p>
-          </a>
-          <a href="" class="min nav-menu-button button">
-            {{ linkedin_icon('nav-menu-lin') }}
-            <p>LinkedIn</p>
-          </a>
-
-          <button data-drawer="close" class="nav-menu-button pill button close">
-            Close
-          </button>
-        </div>
-      </wa-drawer>
-
-      {# —— NAVBAR —————————— #}
-      <nav id="heroCard" class="museomoderno tinted {{ 'glass' if isHero }}">
-        <section id="nameCard" class="tinted {{ 'glass' if not isHero }}">
-          {{ logo('stroke') }}
-          {# dynamic CSS `content` #}
-        </section>
-
-        <div
-          class="nav-items mobile museomoderno tinted {{ 'glass' if not isHero }} {# .pressable .button toggled in navMorph #}"
-        >
-          <div class="nav-mobile-list ">{{ link_items(links) }}</div>
-
-          <div
-            id="navSidebarOpenButton"
-            class="nav-mobile-menu"
-            data-drawer="open navSidebar"
-          >
-            <svg
-              viewbox="0 0 48 48"
-              height="48"
-              width="48"
-              style="filter: drop-shadow(var(--text-shadow));"
-            >
-              {% for i in [10, 24, 38] %}
-                <line
-                  x1="4"
-                  x2="44"
-                  y1="{{ i }}"
-                  y2="{{ i }}"
-                  stroke="var(--text)"
-                  stroke-width="0.33rem"
-                  stroke-linecap="round"
-                />
-              {% endfor %}
-            </svg>
-          </div>
-        </div>
-
-        <div
-          class="nav-items desktop museomoderno tinted {{ 'glass' if not isHero }}"
-        >
-          {{ link_items(links) }}
-        </div>
-
-        <div id="fastContacts" class="{{ 'hide' if not isHero }}">
-          {{ github_icon('github-icon') }}
-          {{ linkedin_icon('linkedin-icon') }}
-        </div>
-      </nav>
-    {% endmacro %}
-
-    {# ———————————————————— #}
-
-    {% macro link_items(dict) %}
-      {% for link, this in dict.items() %}
-        <a
-          href="{{ url_for(link) }}"
-          class="nav-link min button {{ 'current' if this['active'] }} "
-        >
-          {{ this['name'] }}
-        </a>
-      {% endfor %}
-    {% endmacro %}
-
-    {# ——————————————————————————————————————————————————————————————— #}
-
-    {% block content %}
-      {# ——— MAIN PAGE ——— #}
-    {% endblock %}
-
-    {# Footer #}
     {% include 'footer.html' %}
   </body>
 </html>

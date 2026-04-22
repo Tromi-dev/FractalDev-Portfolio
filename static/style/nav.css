@@ -15,24 +15,20 @@
   height: 60dvh;
   width: 70%;
   min-height: fit-content;
-  min-width: fit-content;
+  /* min-width: fit-content; */
   max-width: 95dvw;
-
   position: fixed;
   top: 50%;
   left: 50%;
   translate: -50% -50%;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
   gap: 2rem;
-
   font-size: 1.25rem;
   text-shadow: var(--text-shadow);
   z-index: 9001;
-
   transition:
     height 0.1s ease-out,
     width 0.15s ease-out,
@@ -46,10 +42,12 @@
     justify-content: space-between;
     width: 91% !important;
     gap: 1rem !important;
+    max-width: 90dvw !important;
 
     #nameCard {
       flex-direction: row;
       font-size: 2rem;
+      padding: 1rem 1.5rem 1rem 0.5rem;
 
       &::after {
         content: "Peter C";
@@ -57,9 +55,6 @@
         white-space: preserve nowrap;
         text-overflow: clip;
         letter-spacing: 0px;
-      }
-      > svg {
-        height: 2em;
       }
     }
   }
@@ -75,6 +70,7 @@
   #nameCard,
   .nav-items {
     height: 70%;
+    padding: 1rem;
   }
 }
 
@@ -101,6 +97,19 @@
   &:is(.split *) {
     flex-wrap: nowrap;
   }
+}
+
+.nav-logo-wrapper {
+  background-color: hsl(from var(--background) h calc(95%) l / 50%);
+  border-radius: 1000px;
+  padding: 1rem;
+  height: 2em;
+  /* max-height: 90%; */
+  width: 2em;
+  box-shadow: inset 0 2px 4px 3px oklch(from black l c h / 15%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .nav-items {
@@ -160,11 +169,6 @@
   --state-bg-color: oklch(
     from white l c h / var(--intensity /* always defined */)
   );
-}
-
-#nameCard .logo {
-  width: auto;
-  height: 3em;
 }
 
 #fastContacts {
@@ -342,10 +346,6 @@ wa-drawer {
   #nameCard {
     flex-direction: row;
     font-size: 3rem;
-
-    .logo {
-      height: 2em;
-    }
 
     &:is(.split #nameCard)::after {
       content: "Peter Cakebread";

@@ -29,9 +29,7 @@
     // outerCard starts with glass (hero state), children without
     outerCard.classList.add("glass");
 
-    // ? combine if safe
-    nameCard.classList.remove("glass");
-    Array(document.querySelectorAll(".nav-items")).forEach((el) =>
+    [nameCard, ...document.querySelectorAll(".nav-items")].forEach(el =>
       el.classList.remove("glass"),
     );
 
@@ -97,7 +95,7 @@
         outerCard.classList.remove("glass");
         outerCard.classList.add("split");
 
-        [nameCard, itemCard].forEach((el) => el.classList.add("glass"));
+        [nameCard, itemCard].forEach(el => el.classList.add("glass"));
 
         if (!ViewportIsWiderThan(1060)) {
           itemCard.classList.add("pressable", "button");
@@ -107,7 +105,7 @@
         outerCard.classList.add("glass");
         outerCard.classList.remove("split");
 
-        [nameCard, itemCard].forEach((el) => el.classList.remove("glass"));
+        [nameCard, itemCard].forEach(el => el.classList.remove("glass"));
 
         if (!ViewportIsWiderThan(1060)) {
           itemCard.classList.remove("pressable", "button");

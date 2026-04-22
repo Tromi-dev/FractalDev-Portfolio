@@ -1,41 +1,22 @@
 :root {
-  /* waves_a */
-  --text: #edeaea;
-  --background: #1e36aa;
-  --primary: #5d96cd;
-  --secondary: #8fc4f6;
-  --accent: #e5b88b;
-
-  /* waves_b */
-  /* --text: #eeedf2;
-  --primary: #572fe9;
-  --background: #090935;
-  --secondary: #569ded;
-  --accent: #eae2a6; */
-
-  /* funfish */
-  /* --text: #161616;
-  --background: #52a3a0;
-  --primary: #cd845d;
-  --secondary: #e8e8e8;
-  --accent: #1f5252; */
+  /* clouds */
+  --text: #fffaf8;
+  --background: #18689d;
+  --primary: #78cffd;
+  --accent: hsl(36, 73%, 76%);
 
   --text-shadow: 0.15em 0.15em 0.15em oklch(from black l c h / 25%);
-}
 
-html {
   min-height: 100dvh;
   width: 100dvw;
   color: var(--text);
   background-color: var(--backgroud);
-
   scrollbar-color: currentColor transparent;
 
   *:focus-visible {
     outline: 4px solid;
     outline-color: hsl(from var(--accent) h s calc(l + 1));
     outline-offset: 4px;
-    /* outline already follows border-radius in modern browsers */
   }
 }
 
@@ -53,22 +34,26 @@ main {
   justify-content: space-between;
 }
 
-.museomoderno {
-  font-family: "MuseoModerno", sans-serif;
+main section {
+  width: 90%;
+}
+
+.besley {
+  font-family: "Besley", serif;
   font-optical-sizing: auto;
-  font-weight: 400;
+  font-weight: 700;
   font-style: normal;
 }
 
-.montserrat {
-  font-family: "Montserrat", sans-serif;
+.baloo-da-2 {
+  font-family: "Baloo Da 2", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 400;
+  font-weight: 500;
   font-style: normal;
 }
 
 a {
-  color: var(--secondary);
+  color: var(--accent);
   &.min {
     text-decoration: none;
   }
@@ -82,21 +67,21 @@ p {
 
 .glass,
 wa-drawer.glass::part(dialog) /* web-awesome specifity overwriting */ {
-  --intensity: 0.1;
-  background-color: oklch(from var(--secondary) l c h / var(--intensity));
-  box-shadow: 8px 8px 4px oklch(from black l c h / calc(var(--intensity) / 2));
-  border: 1px solid oklch(from white l c h / 35%);
-
-  border-radius: 1.5rem;
+  border-radius: 100px;
   padding: 1rem 2rem;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(20px);
   text-shadow: var(--text-shadow);
+
+  --intensity: 0.15;
+
+  background-color: oklch(from var(--text) l c h / var(--intensity));
+  border: 1px solid oklch(from white l c h / calc(var(--intensity) + 0.1));
+  box-shadow:
+    24px 56px 8px calc(var(--intensity) / 3 * 2),
+    inset 0 0 24px 1.5rem calc(var(--intensity) / 3 * 2);
 }
-.glass.tinted,
-wa-drawer.glass.tinted::part(dialog) /* web-awesome specifity overwriting */ {
-  --intensity: 0.25;
-  backdrop-filter: blur(12px);
-  border: 1px solid oklch(from white l c h / 50%);
+.glass.tinted {
+  --intensity: 0.3 !important;
 }
 
 .glass.image-wrapper img {
@@ -189,6 +174,14 @@ wa-drawer.glass.tinted::part(dialog) /* web-awesome specifity overwriting */ {
   }
 }
 
+.logo {
+  height: 0.9em;
+  width: auto;
+}
+#footer .logo {
+  height: 6rem;
+}
+
 /* * —— FOOTER ———————————— */
 
 #footer {
@@ -196,12 +189,17 @@ wa-drawer.glass.tinted::part(dialog) /* web-awesome specifity overwriting */ {
   width: 90dvw;
   margin: 4rem 0 5dvw;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  flex-wrap: wrap;
+
+  display: grid;
+  grid-template-areas:
+    "logo"
+    "links"
+    "credits"
+    "server";
+  grid-template-rows: repeat(4, 1fr);
   gap: 1rem;
+  align-items: center;
+  justify-content: center;
 }
 
 #contactLinks {
@@ -225,7 +223,11 @@ wa-drawer.glass.tinted::part(dialog) /* web-awesome specifity overwriting */ {
 
 @media screen and (width >= 650px) {
   #footer {
-    flex-direction: row;
+    grid-template-areas: "logo links credits server";
+    grid-template-rows: unset;
+    grid-template-columns: 1fr 2fr 2fr 1fr;
+
+    padding: 1rem 4rem;
   }
 }
 

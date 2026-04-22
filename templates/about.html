@@ -26,45 +26,43 @@
 {% endmacro %}
 
 {% block content %}
-  <main>
-    {{ navabar(links) }}
+  {{ navabar(links) }}
 
-    <section class="abt-sect-wrapper">
-      <h1 class="abt-sect-header glass museomoderno" id="intro">About Me</h1>
-      <p>
-        Hi, I am peter cakebread a software developer and server admin in the UK
-        i work on projects such as Ocean Zone and Telepy these are both web
-        projects as that is what I'm mainly focusing on at this time. I enjoy
-        the hardware side of software development, and I am enthusiastic towards
-        the management of my enterprise-grade equipment for server hosting
-        projects and storage. I use my enterprise equipment for an array of
-        applications such as Lucaplex my media server software that runs in the
-        browser but also website hosting services which I am offering.
-      </p>
-    </section>
+  <section class="abt-sect-wrapper">
+    <h1 class="abt-sect-header glass besley" id="intro">About Me</h1>
+    <p>
+      Hi, I am peter cakebread a software developer and server admin in the UK i
+      work on projects such as Ocean Zone and Telepy these are both web projects
+      as that is what I'm mainly focusing on at this time. I enjoy the hardware
+      side of software development, and I am enthusiastic towards the management
+      of my enterprise-grade equipment for server hosting projects and storage.
+      I use my enterprise equipment for an array of applications such as
+      Lucaplex my media server software that runs in the browser but also
+      website hosting services which I am offering.
+    </p>
+  </section>
 
-    <section class="abt-sect-wrapper" id="skills">
-      <h1 class="abt-sect-header glass museomoderno" id="intro">My Skills</h1>
+  <section class="abt-sect-wrapper" id="skills">
+    <h1 class="abt-sect-header glass besley" id="intro">My Skills</h1>
 
-      <ul class="skillset">
-        {% for skill, s in skills_data %}
-          {{ render_skill(skill, s['icon(s)']) }}
-        {% endfor %}
-      </ul>
-    </section>
+    <ul class="skillset">
+      {% for skill, s in skills_data %}
+        {{ render_skill(skill, s['icon(s)']) }}
+      {% endfor %}
+    </ul>
+  </section>
 
-    <div
-      data-iframe-width="150"
-      data-iframe-height="270"
-      data-share-badge-id="1c081f5e-e20e-4c24-8cfc-3cda50ce5eae"
-      data-share-badge-host="https://www.credly.com"
-    ></div>
-    <script
-      type="text/javascript"
-      async
-      src="//cdn.credly.com/assets/utilities/embed.js"
-    ></script>
-  </main>
+  <div
+    data-iframe-width="150"
+    data-iframe-height="270"
+    data-share-badge-id="1c081f5e-e20e-4c24-8cfc-3cda50ce5eae"
+    data-share-badge-host="https://www.credly.com"
+  ></div>
+  <script
+    type="text/javascript"
+    async
+    src="//cdn.credly.com/assets/utilities/embed.js"
+  ></script>
 
   <!-- <div class="image" style="padding-top: 2.5%">
     <img
