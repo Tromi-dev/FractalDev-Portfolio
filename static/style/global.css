@@ -34,7 +34,7 @@ main {
   justify-content: space-between;
 }
 
-main section {
+main > section {
   width: 90%;
 }
 
@@ -67,21 +67,22 @@ p {
 
 .glass,
 wa-drawer.glass::part(dialog) /* web-awesome specifity overwriting */ {
-  border-radius: 100px;
+  border-radius: 3em;
   padding: 1rem 2rem;
-  backdrop-filter: blur(20px);
   text-shadow: var(--text-shadow);
 
   --intensity: 0.15;
 
-  background-color: oklch(from var(--text) l c h / var(--intensity));
+  background-color: hsl(from var(--text) h s l / var(--intensity));
   border: 1px solid oklch(from white l c h / calc(var(--intensity) + 0.1));
   box-shadow:
     24px 56px 8px calc(var(--intensity) / 3 * 2),
     inset 0 0 24px 1.5rem calc(var(--intensity) / 3 * 2);
-}
-.glass.tinted {
-  --intensity: 0.3 !important;
+  backdrop-filter: blur(calc(var(--intensity) / 3 * 100px));
+
+  &:is(.tinted) {
+    --intensity: 0.3;
+  }
 }
 
 .glass.image-wrapper img {
@@ -144,27 +145,29 @@ wa-drawer.glass::part(dialog) /* web-awesome specifity overwriting */ {
   padding: 0.5rem 1rem;
   border-radius: 1000px;
 
-  --state-bg-color: none;
+  --base-color: none;
   --base-opacity: 0;
   --bg-color-opacity: var(--base-opacity);
 
   background-color: hsl(
-    from var(--state-bg-color, inherit) h s calc(l + var(--lightness, 0)) /
-      calc(var(--bg-color-opacity) / 100)
+    from var(--base-color, inherit) h s calc(l + var(--lightness, 0)) /
+      calc(var(--bg-color-opacity) * 100%)
   );
 
   &:hover {
-    --bg-color-opacity: calc(var(--base-opacity) + 25);
+    --bg-color-opacity: calc(var(--base-opacity) + 0.1);
   }
   &:active {
-    --bg-color-opacity: calc(var(--base-opacity) + 45);
+    --bg-color-opacity: calc(var(--base-opacity) + 0.2);
     --lightness: 6;
   }
 
   &.pressable {
-    transition: /* likely be overwritten — include these in new instance */
+    /* likely be overwritten — include these in new instance */
+    transition:
       background-color 150ms ease-in-out,
       scale 150ms ease-in;
+
     &:hover {
       scale: 1.05;
     }
@@ -177,6 +180,7 @@ wa-drawer.glass::part(dialog) /* web-awesome specifity overwriting */ {
 .logo {
   height: 0.9em;
   width: auto;
+  padding-left: 0.1em;
 }
 #footer .logo {
   height: 6rem;

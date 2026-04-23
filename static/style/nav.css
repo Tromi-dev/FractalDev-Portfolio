@@ -47,15 +47,7 @@
     #nameCard {
       flex-direction: row;
       font-size: 2rem;
-      padding: 1rem 1.5rem 1rem 0.5rem;
-
-      &::after {
-        content: "Peter C";
-        font-size: 2rem;
-        white-space: preserve nowrap;
-        text-overflow: clip;
-        letter-spacing: 0px;
-      }
+      padding: 1rem 1.75rem 1rem 1rem;
     }
   }
 
@@ -67,10 +59,19 @@
 }
 
 .split {
+  #nameCard::after {
+    content: "Peter C";
+    font-size: 2rem;
+    white-space: preserve nowrap;
+    text-overflow: clip;
+    letter-spacing: 0px;
+  }
+
   #nameCard,
   .nav-items {
     height: 70%;
-    padding: 1rem;
+
+    width: fit-content;
   }
 }
 
@@ -103,9 +104,9 @@
   background-color: hsl(from var(--background) h calc(95%) l / 50%);
   border-radius: 1000px;
   padding: 1rem;
-  height: 2em;
-  /* max-height: 90%; */
-  width: 2em;
+  /* height: 2em;
+
+  width: 2em; */
   box-shadow: inset 0 2px 4px 3px oklch(from black l c h / 15%);
   display: flex;
   align-items: center;
@@ -120,18 +121,8 @@
   width: max-content;
 }
 
-.nav-items.mobile {
-  transition: padding 150ms ease-in-out;
-
-  /* i.e. will be hamburger icon */
-  &:is(.split > .nav-items.mobile) {
-    padding: 1rem;
-    aspect-ratio: 1 / 1;
-  }
-}
-
 .nav-link {
-  --state-bg-color: none;
+  --base-color: none;
 
   padding: 0.25em 1em;
   border-radius: 100px;
@@ -157,6 +148,26 @@
   }
 }
 
+.nav-items.mobile {
+  transition:
+    padding 150ms ease-in-out,
+    background-color 150ms ease-in-out,
+    scale 150ms ease-in;
+
+  /* i.e. will be hamburger icon */
+  &:is(.split > .nav-items.mobile) {
+    padding: 1rem;
+    aspect-ratio: 1 / 1;
+
+    /* in hamburger mode */
+    &.pressable.button {
+      /* Variables let the .pressable class alter the colour and opacity in different states (i.e. hover, active) */
+      --base-color: var(--text);
+      --base-opacity: var(--intensity);
+    }
+  }
+}
+
 .nav-mobile-list {
   display: flex;
   flex-direction: column;
@@ -165,10 +176,12 @@
 }
 
 .nav-mobile-menu {
-  /* Variable lets the .pressable class alter the colour in different states (i.e. hover, active) */
-  --state-bg-color: oklch(
-    from white l c h / var(--intensity /* always defined */)
-  );
+  height: fit-content;
+  width: fit-content;
+  svg {
+    height: 2.5rem;
+    width: auto;
+  }
 }
 
 #fastContacts {
@@ -254,7 +267,7 @@ wa-drawer {
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
 
-    --state-bg-color: currentColor;
+    --base-color: currentColor;
   }
   .nav-link.current {
     padding-bottom: 0.6rem;
@@ -293,7 +306,7 @@ wa-drawer {
   padding: 0.1em 0;
 
   color: var(--text);
-  --state-bg-color: currentColor;
+  --base-color: currentColor;
 }
 
 /* * ———— MEDIA ——————————————————————————————————————————————————————————————— */
@@ -317,6 +330,12 @@ wa-drawer {
   display: none;
 }
 
+@media screen and (width >= 500px) {
+  .split #nameCard::after {
+    content: "Peter Cakebread";
+  }
+}
+
 @media screen and (width >= 768px) {
   wa-drawer::part(dialog) {
     top: 2.5dvh;
@@ -334,22 +353,23 @@ wa-drawer {
 }
 
 @media screen and (width >= 1060px) {
+  #nameCard {
+    flex-direction: row;
+    font-size: 3rem;
+
+    &:is(.split #nameCard)::after {
+      white-space: nowrap;
+    }
+  }
+}
+
+@media screen and (width >= 1230px) {
   .nav-items {
     &.desktop {
       display: flex;
     }
     &.mobile {
       display: none;
-    }
-  }
-
-  #nameCard {
-    flex-direction: row;
-    font-size: 3rem;
-
-    &:is(.split #nameCard)::after {
-      content: "Peter Cakebread";
-      white-space: nowrap;
     }
   }
 }

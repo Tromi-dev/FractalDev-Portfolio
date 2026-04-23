@@ -16,7 +16,17 @@
 
   <section id="whoAmI" class="home-sect-wrapper">
     {# Mobile —> flex; Desktop —> 4x4 grid #}
-    <h2 class="home-sect-header glass besley">Who Am I?</h2>
+    <div class="home-sect-info glass">
+      <h2 class="home-sect-header besley">Who Am I?</h2>
+      <p class="home-sect-text baloo-da-2">
+        Hi I am a software developer, server hosting and repair technician. I
+        enjoy manging hardware for hosting eg the server running this website,
+        hopefully. I love repairing games consoles and Ipods and restoring to
+        their original condition but some also adding mods like mod chips,
+        custom lights and ssds even to ipods.
+      </p>
+    </div>
+
     <div class="image-wrapper glass">
       <img
         src="{{ url_for('static', filename='media/server.webp') }}"
@@ -24,13 +34,7 @@
         class="home-sect-image baloo-da-2"
       />
     </div>
-    <p class="home-sect-text glass baloo-da-2">
-      Hi I am a software developer, server hosting and repair technician. I
-      enjoy manging hardware for hosting eg the server running this website,
-      hopefully. I love repairing games consoles and Ipods and restoring to
-      their original condition but some also adding mods like mod chips, custom
-      lights and ssds even to ipods.
-    </p>
+
     <a
       class="home-sect-cta glass besley min pressable button"
       href="{{ url_for('about') }}"
@@ -39,7 +43,19 @@
   </section>
 
   <section id="projects" class="home-sect-wrapper">
-    <h2 class="home-sect-header glass besley">My Projects</h2>
+    <div class="home-sect-info glass">
+      <h2 class="home-sect-header besley">My Projects</h2>
+      <p class="home-sect-text baloo-da-2">
+        I work on serval projects these consist of Lucaplex, Ocean Zone (video
+        hosting project), and Telepy. Lucaplex while currently not on Github is
+        a software I made which organises all my movies. Ocean Zone will be a
+        YouTube clone and still is currently in development due to issues with
+        my isp causing delays. While Telepy is a project that I have worked on
+        for the last 3 years and is evolving every time i look at it currently I
+        am planning to work on a web client which will be hosted on this site.
+      </p>
+    </div>
+
     <div class="image-wrapper glass">
       <img
         src="{{ url_for('static', filename='media/luca.png') }}"
@@ -47,15 +63,7 @@
         class="home-sect-image baloo-da-2"
       />
     </div>
-    <p class="home-sect-text glass baloo-da-2">
-      I work on serval projects these consist of Lucaplex, Ocean Zone (video
-      hosting project), and Telepy. Lucaplex while currently not on Github is a
-      software I made which organises all my movies. Ocean Zone will be a
-      YouTube clone and still is currently in development due to issues with my
-      isp causing delays. While Telepy is a project that I have worked on for
-      the last 3 years and is evolving every time i look at it currently I am
-      planning to work on a web client which will be hosted on this site.
-    </p>
+
     <a
       class="home-sect-cta glass besley min pressable button"
       href="{{ url_for('projects') }}"

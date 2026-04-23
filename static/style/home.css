@@ -32,12 +32,17 @@
   }
 }
 
+.home-sect-info {
+  background-color: oklch(from var(--background) l c h / 75%);
+  grid-area: info;
+}
+
 .home-sect-header {
   text-align: center;
   font-size: 1.5rem;
   margin: 0;
   letter-spacing: 0.25em;
-  max-height: 4em;
+  max-height: 3.5em;
   height: 5em;
   /* width: fit-content; */
   display: flex;
@@ -50,13 +55,15 @@
 .image-wrapper:has(.home-sect-image) {
   padding: 1.5rem 2rem;
   grid-area: image;
+
+  border-radius: 3rem;
 }
 
 .home-sect-image {
   height: 100%;
   width: 100%;
   object-fit: cover;
-  border-radius: 1rem;
+  border-radius: 3rem;
 }
 
 .home-sect-text {
@@ -69,8 +76,8 @@
 
 .home-sect-cta {
   /* sets bg color & opacity for .button —> can be modified consistently across site */
-  --state-bg-color: var(--accent);
-  --base-opacity: 50;
+  --base-color: var(--text);
+  --base-opacity: var(--intensity);
 
   grid-area: cta;
   justify-self: center;
@@ -89,12 +96,21 @@
 @media screen and (width >= 768px) {
   .home-sect-wrapper {
     display: grid;
-    grid-template-areas: "title image" "text image" "text image" "text cta";
+    grid-template-areas:
+      "info image"
+      "info image"
+      "info image"
+      "info cta";
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto 1fr 1fr auto;
 
-    /* height: fit-content;
-    max-height: 60dvh; */
+    &:nth-child(odd) {
+      grid-template-areas:
+        "image info"
+        "image info"
+        "image info"
+        "cta info";
+    }
 
     .home-sect-header,
     .home-sect-text {
@@ -112,7 +128,6 @@
 
     .image-wrapper:has(.home-sect-image) {
       position: relative;
-      border-radius: 1000px;
     }
 
     .image-wrapper:has(.home-sect-image),
@@ -127,7 +142,6 @@
       height: 100%;
       width: 100%;
       object-fit: cover;
-      border-radius: 1000px;
     }
 
     .home-sect-text {
@@ -141,11 +155,9 @@
 
     .home-sect-cta {
       align-self: self-end;
+      margin-bottom: 0.1em;
     }
   }
 }
 @media screen and (width >= 1525px) {
-  .home-sect-wrapper {
-    gap: 2rem;
-  }
 }

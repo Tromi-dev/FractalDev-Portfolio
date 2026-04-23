@@ -14,7 +14,7 @@
     const outerCard = document.getElementById("heroCard");
     const nameCard = document.getElementById("nameCard");
     const itemCard = document.querySelector(
-      `.nav-items.${ViewportIsWiderThan() ? "desktop" : "mobile"}`,
+      `.nav-items.${ViewportIsWiderThan(1230) ? "desktop" : "mobile"}`,
     );
     const contacts = document.getElementById("fastContacts");
 
@@ -89,7 +89,6 @@
       const shouldBeMerged = morphStage < mergeThreshold;
 
       // * Splits or merges on scroll AND each reload
-      // TODO —> (-- adjust to 1090px) make sure glass is present where needed; ++ add pressable button to hamburger; ++ maybe remove glass from all itemcards for consistency
       if (!isSplit && shouldBeSplit) {
         isSplit = true;
         outerCard.classList.remove("glass");
@@ -97,7 +96,7 @@
 
         [nameCard, itemCard].forEach(el => el.classList.add("glass"));
 
-        if (!ViewportIsWiderThan(1060)) {
+        if (!ViewportIsWiderThan(1230)) {
           itemCard.classList.add("pressable", "button");
         }
       } else if (isSplit && shouldBeMerged) {
@@ -107,7 +106,7 @@
 
         [nameCard, itemCard].forEach(el => el.classList.remove("glass"));
 
-        if (!ViewportIsWiderThan(1060)) {
+        if (!ViewportIsWiderThan(1230)) {
           itemCard.classList.remove("pressable", "button");
         }
       }
