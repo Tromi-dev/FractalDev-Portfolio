@@ -10,7 +10,7 @@
   min-height: 100dvh;
   width: 100dvw;
   color: var(--text);
-  background-color: var(--backgroud);
+  background-color: var(--background);
   scrollbar-color: currentColor transparent;
 
   *:focus-visible {
@@ -38,18 +38,18 @@ main > section {
   width: 90%;
 }
 
-.besley {
-  font-family: "Besley", serif;
-  font-optical-sizing: auto;
-  font-weight: 700;
+.kodchasan {
+  font-family: "Kodchasan", sans-serif;
+  font-weight: 600;
   font-style: normal;
 }
 
-.baloo-da-2 {
-  font-family: "Baloo Da 2", sans-serif;
+.sono {
+  font-family: "Sono", monospace;
   font-optical-sizing: auto;
-  font-weight: 500;
+  font-weight: 400;
   font-style: normal;
+  font-variation-settings: "MONO" 1;
 }
 
 a {
@@ -60,7 +60,7 @@ a {
 }
 
 p {
-  letter-spacing: 0.1em;
+  letter-spacing: 0.05em;
 }
 
 /* * —— UNIVERSAL CLASSES ———————— */
@@ -75,13 +75,30 @@ wa-drawer.glass::part(dialog) /* web-awesome specifity overwriting */ {
 
   background-color: hsl(from var(--text) h s l / var(--intensity));
   border: 1px solid oklch(from white l c h / calc(var(--intensity) + 0.1));
-  box-shadow:
-    24px 56px 8px calc(var(--intensity) / 3 * 2),
-    inset 0 0 24px 1.5rem calc(var(--intensity) / 3 * 2);
-  backdrop-filter: blur(calc(var(--intensity) / 3 * 100px));
+
+  --shadow-color: oklch(from black l c h / calc(var(--intensity)));
+  box-shadow: inset 0 0 24px 0.25em var(--shadow-color);
+
+  --blur: calc(var(--intensity) / 3 * 100px);
+  backdrop-filter: blur(calc(var(--blur)));
 
   &:is(.tinted) {
     --intensity: 0.3;
+  }
+}
+
+.glass:not(wa-drawer) {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    top: min(15%, 2rem);
+    left: 0.75rem;
+    height: calc(100% + 0.5em);
+    width: calc(100% + 0.5em);
+    border-radius: 3em;
+    background-color: rgba(0, 0, 0, calc(var(--intensity) / 3));
+    filter: blur(4px);
   }
 }
 
@@ -130,6 +147,15 @@ wa-drawer.glass::part(dialog) /* web-awesome specifity overwriting */ {
     translate: 0 -0.25rem;
   }
 }
+@keyframes bigBounce {
+  0%,
+  100% {
+    translate: 0 0.25rem;
+  }
+  50% {
+    translate: 0 -0.75rem;
+  }
+}
 
 .logo {
   .stroke {
@@ -144,6 +170,8 @@ wa-drawer.glass::part(dialog) /* web-awesome specifity overwriting */ {
 .button {
   padding: 0.5rem 1rem;
   border-radius: 1000px;
+  /* likely be overwritten — include these in new instance */
+  transition: background-color 150ms ease-in-out;
 
   --base-color: none;
   --base-opacity: 0;

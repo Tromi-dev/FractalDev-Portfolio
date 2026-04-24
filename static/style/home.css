@@ -35,21 +35,39 @@
 .home-sect-info {
   background-color: oklch(from var(--background) l c h / 75%);
   grid-area: info;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+
+  padding: 2rem;
+  gap: 1.5rem;
 }
 
 .home-sect-header {
   text-align: center;
   font-size: 1.5rem;
+  letter-spacing: 0.1em;
+  position: relative;
+  width: 100%;
   margin: 0;
-  letter-spacing: 0.25em;
-  max-height: 3.5em;
-  height: 5em;
-  /* width: fit-content; */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 500;
-  grid-area: title;
+}
+
+.home-divider {
+  height: 2px;
+  width: 90%;
+  background-color: var(--text);
+  opacity: 50%;
+}
+
+.home-sect-text {
+  height: fit-content;
+  line-height: 1.25;
+  margin: 0;
+  padding: 0em 4em;
+
+  font-size: 1rem;
 }
 
 .image-wrapper:has(.home-sect-image) {
@@ -64,14 +82,6 @@
   width: 100%;
   object-fit: cover;
   border-radius: 3rem;
-}
-
-.home-sect-text {
-  line-height: 1.25;
-  grid-area: text;
-  margin: 0;
-  scrollbar-width: thin;
-  font-size: 1rem;
 }
 
 .home-sect-cta {
@@ -91,6 +101,8 @@
 
   width: 99%;
   padding: 0.75em 1.25em;
+
+  animation: bigBounce 2.5s ease-in-out infinite;
 }
 
 @media screen and (width >= 768px) {
@@ -103,6 +115,7 @@
       "info cta";
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto 1fr 1fr auto;
+    gap: 2rem;
 
     &:nth-child(odd) {
       grid-template-areas:
@@ -112,9 +125,8 @@
         "cta info";
     }
 
-    .home-sect-header,
-    .home-sect-text {
-      align-self: self-start;
+    .home-sect-info {
+      height: 100%;
     }
 
     .image-wrapper:has(.home-sect-image) {
@@ -130,10 +142,8 @@
       position: relative;
     }
 
-    .image-wrapper:has(.home-sect-image),
-    .home-sect-text {
+    .image-wrapper:has(.home-sect-image) {
       min-height: 35dvh;
-      max-height: 60dvh;
     }
 
     .home-sect-image {
@@ -145,11 +155,10 @@
     }
 
     .home-sect-text {
-      padding: 2em 3em;
       overflow-y: auto;
+      scrollbar-width: thin;
 
       display: flex;
-      align-items: center;
       justify-content: center;
     }
 

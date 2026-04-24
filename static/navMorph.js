@@ -7,14 +7,14 @@
   function init() {
     if (cleanup) cleanup();
 
-    const ViewportIsWiderThan = (width = 1060) =>
+    const viewportIsWiderThan = (width = 1060) =>
       window.matchMedia(`(width >= ${width}px)`).matches;
 
     // Get Elements
     const outerCard = document.getElementById("heroCard");
     const nameCard = document.getElementById("nameCard");
     const itemCard = document.querySelector(
-      `.nav-items.${ViewportIsWiderThan(1230) ? "desktop" : "mobile"}`,
+      `.nav-items.${viewportIsWiderThan(1230) ? "desktop" : "mobile"}`,
     );
     const contacts = document.getElementById("fastContacts");
 
@@ -62,7 +62,7 @@
       const height = initialHeight - (initialHeight - finalHeight) * morphStage;
       outerCard.style.height = `${height}px`;
       // —— Width
-      if (ViewportIsWiderThan(768)) {
+      if (viewportIsWiderThan(768)) {
         const finalWidth = window.innerWidth * 0.9;
         const width = initialWidth + (finalWidth - initialWidth) * morphStage;
         outerCard.style.width = `${width}px`;
@@ -77,6 +77,12 @@
       // —— Flex Direction & icons
       const shouldBeRow = morphStage > 0.4;
       outerCard.style.flexDirection = shouldBeRow ? "row" : "column";
+
+      const pageLinkList = viewportIsWiderThan(1230)
+        ? itemCard
+        : document.querySelector(".nav-mobile-list");
+      pageLinkList.style.flexDirection = shouldBeRow ? "column" : "row";
+
       contacts.style.display = shouldBeRow ? "none" : "flex";
       // —— Gap
       const gap = Math.max(14 / 40, (morphStage - 0.4) / 0.6) * 40;
@@ -96,7 +102,7 @@
 
         [nameCard, itemCard].forEach(el => el.classList.add("glass"));
 
-        if (!ViewportIsWiderThan(1230)) {
+        if (!viewportIsWiderThan(1230)) {
           itemCard.classList.add("pressable", "button");
         }
       } else if (isSplit && shouldBeMerged) {
@@ -106,7 +112,7 @@
 
         [nameCard, itemCard].forEach(el => el.classList.remove("glass"));
 
-        if (!ViewportIsWiderThan(1230)) {
+        if (!viewportIsWiderThan(1230)) {
           itemCard.classList.remove("pressable", "button");
         }
       }

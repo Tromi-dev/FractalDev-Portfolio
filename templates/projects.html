@@ -27,7 +27,7 @@
 
 {% block content %}
   <main>
-    <h1 class="glass besley">My Projects</h1>
+    <h1 class="glass kodchasan">My Projects</h1>
     <section id="projectFilterUI">
       <!-- search, filter, sort -->
       <!-- search take min 50%, convert rest to modal if too wide -->
@@ -95,7 +95,7 @@
         {% for p in projects %}
           <a href="{{ p['page_url'] }}" class="min">
             <article
-              class="project-card baloo-da-2 glass image-wrapper"
+              class="project-card sono glass image-wrapper"
               {% for attr in p %}
                 data-{{ attr }}="{{ p[attr] }}"
               {% endfor %}
