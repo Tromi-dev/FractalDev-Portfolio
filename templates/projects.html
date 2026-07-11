@@ -100,7 +100,7 @@
                 data-{{ attr }}="{{ p[attr] }}"
               {% endfor %}
             >
-              {% set img_url = "/{{p['local_url']}}/thumbnail.png" %}
+              {% set img_url = p['local_url']+"/thumbnail.png" %}
               <img
                 src="{{ url_for('static', filename=img_url) }}"
                 alt="project image"
